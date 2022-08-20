@@ -5,6 +5,7 @@ import { colores, styles } from "../theme/appTheme"
 //componentes
 import { FloatingButton } from "../components/FloatingButton"
 import { BookingsList } from "../components/BookingsList"
+import { Header } from "../components/Header"
 
 export const CalendarScreen = () => {
   const {top: paddingTop} = useSafeAreaInsets()
@@ -16,15 +17,9 @@ export const CalendarScreen = () => {
         backgroundColor: colores.primary,
         flex: 1
       }}
-    >
-      <Text style={{
-        ...styles.title,
-        color: colores.secondary,
-        fontWeight: '500'
-      }}>
-        Calendario
-      </Text>
-
+    >   
+      <Header title='Calendario'/>
+      
       <BookingsList />
       <FloatingButton />
     </View>
