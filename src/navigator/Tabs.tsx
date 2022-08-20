@@ -4,6 +4,7 @@ import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { CalendarScreen } from '../screens/CalendarScreen'
 import { CustomersScreen } from '../screens/CustomersScreen'
 import { NavigationContainer } from '@react-navigation/native';
+import { colores } from '../theme/appTheme';
 
 export const Tabs = () => {
   return (
@@ -17,7 +18,10 @@ const TabAndroid = createMaterialBottomTabNavigator();
 
 const TabsAndroid = () => {
   return(
-    <TabAndroid.Navigator>
+    <TabAndroid.Navigator
+      barStyle={{backgroundColor: colores.secondary}}
+      sceneAnimationEnabled = {true}
+    >
       <TabAndroid.Screen
         name="CalendarScreen"
         component={CalendarScreen}
