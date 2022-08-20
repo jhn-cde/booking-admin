@@ -1,22 +1,17 @@
-import { StyleSheet, TouchableNativeFeedback, TouchableOpacity, View } from "react-native"
+import { StyleSheet, TouchableNativeFeedback, View } from "react-native"
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { colores, tema } from "../theme/appTheme";
 
 export const FloatingButton = () => {
   return(
     <View
-      style={{
-        ...styles.botonContainer,
-      }}
+      style={styles.botonContainer}
     >
       <TouchableNativeFeedback
         background={TouchableNativeFeedback.Ripple(colores.primary, false, 30)}
         onPress={ () => {} }
       >
-        <View style={{
-          ...styles.boton,
-          backgroundColor: colores.acento
-        }}>
+        <View style={styles.boton}>
           <Icon name="plus" color={'white'} size={35} />
         </View>
       </TouchableNativeFeedback>
@@ -41,6 +36,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colores.acento,
 
     shadowColor: tema == 'dia'? colores.text: colores.acento,
     shadowOpacity: 0.4,
