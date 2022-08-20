@@ -14,10 +14,10 @@ export const BookingItem = ({tour, customerId, customerName, nTravelers}: Props)
       onPress={() => {}}
     >
       <View style={styles.container}>
-        <Text style={styles.tourText}> {tour} </Text>
+        <Text style={styles.tourText}> {customerName} </Text>
         <Text style={styles.customerText}>
           <Text style={{fontWeight: '600', fontSize: 14}}>
-            {customerName}
+            {tour}
           </Text>
           <Text style={{fontWeight: '400', fontSize: 12}}> 
             {nTravelers && ' - '+nTravelers+' pasajeros'}
