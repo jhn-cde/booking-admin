@@ -1,7 +1,7 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 
-import { CalendarScreen } from '../screens/CalendarScreen'
+import { CalendarScreen, CalendarState } from '../screens/CalendarScreen'
 import { CustomersScreen } from '../screens/CustomersScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import { colores } from '../theme/appTheme';
@@ -24,7 +24,7 @@ const TabsAndroid = () => {
     >
       <TabAndroid.Screen
         name="CalendarScreen"
-        component={CalendarScreen}
+        component={CalendarState}
         options={{
           title: 'Calendario',
           tabBarIcon: ({ color }) => (

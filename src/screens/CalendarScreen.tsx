@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { colores, styles } from "../theme/appTheme"
@@ -10,19 +10,19 @@ import { format } from 'date-fns'
 import { FloatingButton } from "../components/FloatingButton"
 import { BookingsList } from "../components/BookingsList"
 import { Header } from "../components/Header"
+import { DateContext, DateProvider } from "../context/DateContext";
 
 export const CalendarScreen = () => {
-
-  const [date, setDate] = useState(new Date());
+  const { dateState, setDate } = useContext(DateContext)
 
   const onChange = (event: object, selectedDate: any) => {
     const currentDate = selectedDate;
-    setDate(currentDate);
+    currentDate && setDate(currentDate);
   };
 
   const showDatepicker = () => {
     DateTimePickerAndroid.open({
-      value: date,
+      value: dateState.curDate,
       onChange,
       mode: 'date',
       is24Hour: true,
@@ -46,7 +46,7 @@ export const CalendarScreen = () => {
           style={dateStyles.date}
         >
           <Text style={dateStyles.dateContent}>
-            {format(date, 'd MMM, y')}  <Icon
+            {format(dateState.curDate, 'd MMM, y')}  <Icon
               name="calendar-outline"
               color={colores.secondary}
               size={20}
@@ -60,6 +60,15 @@ export const CalendarScreen = () => {
     </View>
   )
 }
+
+export const CalendarState = ({children}: any) => {
+  return (
+    <DateProvider>
+      <CalendarScreen />
+    </DateProvider>
+  )
+}
+
 
 const dateStyles = StyleSheet.create({
   date:{
