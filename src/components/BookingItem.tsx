@@ -14,15 +14,22 @@ export const BookingItem = ({tour, customerId, customerName, nTravelers}: Props)
       onPress={() => {}}
     >
       <View style={styles.container}>
-        <Text style={styles.tourText}> {customerName} </Text>
         <Text style={styles.customerText}>
-          <Text style={{fontWeight: '600', fontSize: 14}}>
-            {tour}
-          </Text>
-          <Text style={{fontWeight: '400', fontSize: 12}}> 
-            {nTravelers && ' - '+nTravelers+' pasajeros'}
-          </Text>
+          {customerName}
         </Text>
+        <View style={styles.content}>
+          <Text>
+            <Text style={styles.tourText}>
+              {tour}
+            </Text>
+            <Text style={styles.nTravelersText}> 
+              {nTravelers && ' - '+nTravelers+' pasajeros'}
+            </Text>
+          </Text>
+          <Text style={styles.moreText}> 
+            mas...
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   )
@@ -35,15 +42,30 @@ const styles = StyleSheet.create({
     borderBottomColor: colores.secondary,
     borderBottomWidth: StyleSheet.hairlineWidth
   },
-  text: {
-    color: colores.text
-  },
-  tourText:{
+  customerText:{
     color: colores.secondary,
     fontWeight: '500',
-    fontSize: 20
+    fontSize: 20,
   },
-  customerText:{
-    color: colores.text
+
+  content:{
+    flexDirection: 'row',
+    fill: 1,
+    justifyContent: 'space-between'
+  },
+
+  tourText:{
+    color: colores.text,
+    fontWeight: '600',
+    fontSize: 14
+  },
+  nTravelersText:{
+    color: colores.text,
+    fontWeight: '400',
+    fontSize: 12
+
+  },
+  moreText:{
+    color: colores.acento
   }
 })

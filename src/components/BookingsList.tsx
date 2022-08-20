@@ -31,6 +31,15 @@ const bookings = [
       nTravelers: 1
     }
   },
+  {
+    id: '312',
+    data: {
+      tour: 'Manu',
+      customerId: 'customer1c',
+      customerName: 'Grind',
+      nTravelers: 1
+    }
+  },
 ]
 
 export const BookingsList = () => {
