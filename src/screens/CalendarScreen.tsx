@@ -3,9 +3,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { colores, styles } from "../theme/appTheme"
 
 //componentes
-import { BookingItem } from '../components/BookingItem'
 import { FloatingButton } from "../components/FloatingButton"
-
+import { BookingsList } from "../components/BookingsList"
 
 export const CalendarScreen = () => {
   const {top: paddingTop} = useSafeAreaInsets()
@@ -26,9 +25,7 @@ export const CalendarScreen = () => {
         Calendario
       </Text>
 
-      <BookingItem />
-      <BookingItem />
-      <BookingItem />
+      <BookingsList />
       <FloatingButton />
     </View>
   )
