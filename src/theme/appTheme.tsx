@@ -34,6 +34,6 @@ export const styles = StyleSheet.create({
   },
   text:{
     color: colores.text,
-    fontSize: 14
+    fontSize: 15
   }
 })
