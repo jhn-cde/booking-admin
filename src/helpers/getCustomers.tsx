@@ -1,7 +1,13 @@
 import { bookings, customerInterface } from "../data/bookings";
 
+interface toursInterface{
+  id: string,
+  name: string,
+  state: string
+}
+
 export interface customerDataInterface extends customerInterface{
-  toursID: string[]
+  tours: toursInterface[]
 }
 
 export const getCustomers = () => {  
@@ -11,9 +17,9 @@ export const getCustomers = () => {
     const index = lista.findIndex(elem => elem.nDoc === booking.customer.nDoc)
 
     if(index === -1)
-      lista.push({...booking.customer, toursID:[booking.id]})
+      lista.push({...booking.customer, tours:[{id: booking.id, name: booking.tour, state: booking.state}]})
     else
-      lista[index].toursID.push(booking.id)
+      lista[index].tours.push({id: booking.id, name: booking.tour, state: booking.state})
   })
 
   lista.sort((a, b) => a.name.localeCompare(b.name))
