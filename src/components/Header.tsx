@@ -35,7 +35,6 @@ export const Header = ({title, children}: Props) => {
 
 const headerStyles = StyleSheet.create({
   container:{
-    flex: 1,
     paddingVertical: 10,
   },
   title:{

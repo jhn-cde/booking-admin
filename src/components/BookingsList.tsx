@@ -42,7 +42,7 @@ export const BookingsList = () => {
   const grouped = groupByDate(bookings)
 
   return (
-    <SafeAreaView style={{flex:1}}>
+    <View style={customStyles.container}>
       <ScrollView>
         {
           grouped.map(
@@ -64,11 +64,16 @@ export const BookingsList = () => {
           )
         }
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }
 
 const customStyles = StyleSheet.create({
+  container:{
+    flex:1, 
+    flexDirection: 'row', 
+    alignItems: 'flex-end'
+  },
   dateText: {
     fontSize: 20,
     fontWeight: '500',

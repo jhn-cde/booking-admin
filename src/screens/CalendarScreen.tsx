@@ -43,9 +43,10 @@ export const CalendarScreen = () => {
       <Header title='Calendario'>
         <TouchableOpacity
           onPress={showDatepicker}
-          style={dateStyles.date}
+          style={customStyles.date}
         >
-          <Text style={dateStyles.dateContent}>
+          <Text style={customStyles.text}>Reservas Pendientes</Text>
+          <Text style={customStyles.dateContent}>
             {format(dateState.curDate, 'd MMM, y')}  <Icon
               name="calendar-outline"
               color={colores.secondary}
@@ -70,11 +71,16 @@ export const CalendarState = ({children}: any) => {
 }
 
 
-const dateStyles = StyleSheet.create({
+const customStyles = StyleSheet.create({
+  text:{
+    fontSize: 17,
+  },
   date:{
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    padding: 5
+    justifyContent: 'space-between',
+    padding: 5,
+    paddingLeft: 0,
+    paddingBottom: 30
   },
   dateContent:{
     fontSize: 17,
