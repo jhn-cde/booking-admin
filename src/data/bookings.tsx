@@ -1,3 +1,18 @@
+export interface userInterface{
+  nDoc: string,
+  name: string,
+  phone: string,
+  email: string
+}
+export interface bookingInterface{
+  id: string,
+  tour: string,
+  nTravelers: number,
+  bookingDate: string,
+  tourDate: string,
+  customer: userInterface
+}
+
 export const bookings = [
   {
     id: '1',
@@ -6,7 +21,7 @@ export const bookings = [
     bookingDate: '2022/05/2',
     tourDate: '2022/08/20',
     customer: {
-      doc: '1234',
+      nDoc: '1234',
       name: 'Will A. M',
       phone: '+19999192',
       email: 'willam@gmail.com',
@@ -19,7 +34,7 @@ export const bookings = [
     bookingDate: '2022/06/20',
     tourDate: '2022/08/20',
     customer: {
-      doc: '1235',
+      nDoc: '1235',
       name: 'Elizabeth',
       phone: '+19999192',
       email: 'willam@gmail.com',
@@ -31,8 +46,8 @@ export const bookings = [
     nTravelers: 1,
     bookingDate: '2022/06/20',
     tourDate: '2022/08/21',
-    data: {
-      doc: '1236',
+    customer: {
+      nDoc: '1236',
       name: 'Albus',
       phone: '+19999192',
       email: 'willam@gmail.com',
@@ -44,8 +59,8 @@ export const bookings = [
     nTravelers: 1,
     bookingDate: '2022/06/20',
     tourDate: '2022/08/21',
-    data: {
-      doc: '1237',
+    customer: {
+      nDoc: '1237',
       name: 'Grind',
       phone: '+19999192',
       email: 'willam@gmail.com',
@@ -57,8 +72,8 @@ export const bookings = [
     nTravelers: 1,
     bookingDate: '2022/06/20',
     tourDate: '2022/08/21',
-    data: {
-      doc: '1238',
+    customer: {
+      nDoc: '1238',
       name: 'Newt',
       phone: '+19999192',
       email: 'newt@gmail.com',
@@ -70,8 +85,8 @@ export const bookings = [
     nTravelers: 2,
     bookingDate: '2022/06/20',
     tourDate: '2022/09/15',
-    data: {
-      doc: '1239',
+    customer: {
+      nDoc: '1239',
       name: 'Frodo',
       phone: '+19999192',
       email: 'bolson@gmail.com',
@@ -83,8 +98,8 @@ export const bookings = [
     nTravelers: 1,
     bookingDate: '2022/06/20',
     tourDate: '2022/09/15',
-    data: {
-      doc: '1240',
+    customer: {
+      nDoc: '1240',
       name: 'Smeagol',
       phone: '+19999192',
       email: 'miprecioso@gmail.com',
@@ -96,8 +111,8 @@ export const bookings = [
     nTravelers: 3,
     bookingDate: '2022/06/20',
     tourDate: '2022/09/20',
-    data: {
-      doc: '1241',
+    customer: {
+      nDoc: '1241',
       name: 'Aragorn',
       phone: '+19999192',
       email: 'araghunters@gmail.com',
@@ -109,8 +124,8 @@ export const bookings = [
     nTravelers: 1,
     bookingDate: '2022/05/20',
     tourDate: '2022/09/10',
-    data: {
-      doc: '1242',
+    customer: {
+      nDoc: '1242',
       name: 'Avicii',
       phone: '+19999192',
       email: 'avicii@gmail.com',
@@ -122,8 +137,8 @@ export const bookings = [
     nTravelers: 1,
     bookingDate: '2022/05/21',
     tourDate: '2022/09/11',
-    data: {
-      doc: '1243',
+    customer: {
+      nDoc: '1243',
       name: 'Mike',
       phone: '+19999192',
       email: 'posner@gmail.com',
@@ -135,8 +150,8 @@ export const bookings = [
     nTravelers: 2,
     bookingDate: '2022/07/12',
     tourDate: '2022/10/01',
-    data: {
-      doc: '1244',
+    customer: {
+      nDoc: '1244',
       name: 'Martin',
       phone: '+19999192',
       email: 'garrix@gmail.com',
@@ -148,8 +163,8 @@ export const bookings = [
     nTravelers: 4,
     bookingDate: '2022/07/10',
     tourDate: '2022/10/12',
-    data: {
-      doc: '1245',
+    customer: {
+      nDoc: '1245',
       name: 'Sonny',
       phone: '+19999192',
       email: 'skrillex@gmail.com',
@@ -161,8 +176,8 @@ export const bookings = [
     nTravelers: 1,
     bookingDate: '2022/07/28',
     tourDate: '2022/11/01',
-    data: {
-      doc: '1246',
+    customer: {
+      nDoc: '1246',
       name: 'Martin',
       phone: '+19999192',
       email: 'garrix@gmail.com',
@@ -174,8 +189,8 @@ export const bookings = [
     nTravelers: 1,
     bookingDate: '2022/06/28',
     tourDate: '2022/11/01',
-    data: {
-      doc: '1247',
+    customer: {
+      nDoc: '1247',
       name: 'David',
       phone: '+19999192',
       email: 'gueta@gmail.com',
@@ -187,8 +202,8 @@ export const bookings = [
     nTravelers: 1,
     bookingDate: '2022/07/24',
     tourDate: '2022/10/01',
-    data: {
-      doc: '1248',
+    customer: {
+      nDoc: '1248',
       name: 'Kygo',
       phone: '+19999192',
       email: 'kygo@gmail.com',
