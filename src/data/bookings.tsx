@@ -1,4 +1,4 @@
-export interface userInterface{
+export interface customerInterface{
   nDoc: string,
   name: string,
   phone: string,
@@ -10,7 +10,7 @@ export interface bookingInterface{
   nTravelers: number,
   bookingDate: string,
   tourDate: string,
-  customer: userInterface,
+  customer: customerInterface,
   state: string
 }
 
@@ -190,7 +190,7 @@ export const bookings = [
     bookingDate: '2022/07/28',
     tourDate: '2022/11/01',
     customer: {
-      nDoc: '1246',
+      nDoc: '1244',
       name: 'Martin',
       phone: '+19999192',
       email: 'garrix@gmail.com',
@@ -222,6 +222,20 @@ export const bookings = [
       name: 'Kygo',
       phone: '+19999192',
       email: 'kygo@gmail.com',
+    },
+    state: 'pendiente'
+  },
+  {
+    id: '16',
+    tour: 'Manu',
+    nTravelers: 1,
+    bookingDate: '2022/07/2',
+    tourDate: '2022/10/02',
+    customer: {
+      nDoc: '1234',
+      name: 'Will A. M',
+      phone: '+19999192',
+      email: 'willam@gmail.com',
     },
     state: 'pendiente'
   },
