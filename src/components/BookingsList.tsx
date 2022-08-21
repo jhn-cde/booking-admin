@@ -3,9 +3,9 @@ import { format } from 'date-fns'
 import { ScrollView, StyleSheet, Text, View } from "react-native"
 import { DateContext } from "../context/DateContext"
 import { BookingItem } from "./BookingItem"
-import { getBookinsByState } from "../helpers/getBookingsByState"
+import { getBookinsByStateDate } from "../helpers/getBookingsByState"
 import { bookingInterface } from "../data/bookings"
-import { colores, styles } from "../theme/appTheme"
+import { styles } from "../theme/appTheme"
 
 interface groupedInterface{
   date: string,
@@ -40,7 +40,7 @@ interface Props{
 export const BookingsList = ({navigateTo}: Props) => {
   const { dateState } = useContext(DateContext)
 
-  let bookings = getBookinsByState('pendiente', dateState.curDate)
+  let bookings = getBookinsByStateDate('pendiente', dateState.curDate)
 
   const grouped = groupByDate(bookings)
 
