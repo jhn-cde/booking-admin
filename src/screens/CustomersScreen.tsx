@@ -5,11 +5,17 @@ import { RootStackParams } from "../navigator/StackNavigator";
 import { colores, styles } from "../theme/appTheme"
 
 import { Header } from "../components/Header"
+import { CustomersList } from "../components/CustomersList";
 
 type Props = NativeStackScreenProps<RootStackParams, 'Tabs'>;
 
 const CustomersScreen = ({navigation}: Props) => {
   const {top: paddingTop} = useSafeAreaInsets()
+
+  const navigateTo = (id: string) => {
+    navigation.navigate('Booking', {id: id})
+  }
+
   return (
     <View
       style={{
@@ -22,6 +28,9 @@ const CustomersScreen = ({navigation}: Props) => {
       <Header title={'Clientes'}>
         {}
       </Header>
+      
+      <CustomersList navigateTo={navigateTo}/>
+
     </View>
   )
 }
