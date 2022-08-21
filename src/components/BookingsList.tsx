@@ -3,8 +3,7 @@ import { format } from 'date-fns'
 import { ScrollView, StyleSheet, Text, View } from "react-native"
 import { DateContext } from "../context/DateContext"
 import { BookingItem } from "./BookingItem"
-import { SafeAreaView } from "react-native-safe-area-context"
-import { getBookinsByState } from "../helpers/getBookingByState"
+import { getBookinsByState } from "../helpers/getBookingsByState"
 import { bookingInterface } from "../data/bookings"
 import { colores } from "../theme/appTheme"
 
