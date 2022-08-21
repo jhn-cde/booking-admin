@@ -30,7 +30,7 @@ export const BookingItem = ({id, tour, customer, nTravelers, navigateTo}: itemIn
             </Text>
           </Text>
           <Text style={styles.moreText}> 
-            mas...
+            Ver más...
           </Text>
         </View>
       </View>
@@ -69,6 +69,6 @@ const styles = StyleSheet.create({
 
   },
   moreText:{
-    color: colores.acento
+    color: colores.secondary
   }
 })

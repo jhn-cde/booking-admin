@@ -50,19 +50,20 @@ export const CalendarScreen = ({navigation}: Props) => {
       }}
     >   
       <Header title='Calendario'>
-        <TouchableOpacity
-          onPress={showDatepicker}
-          style={customStyles.date}
-        >
+        <View style={customStyles.date}>
           <Text style={customStyles.text}>Reservas Pendientes</Text>
-          <Text style={customStyles.dateContent}>
-            {format(dateState.curDate, 'd MMM, y')}  <Icon
-              name="calendar-outline"
-              color={colores.secondary}
-              size={20}
-            />
-          </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={showDatepicker}
+          >
+            <Text style={customStyles.dateContent}>
+              {format(dateState.curDate, 'd MMM, y')}  <Icon
+                name="calendar-outline"
+                color={colores.secondary}
+                size={20}
+              />
+            </Text>
+          </TouchableOpacity>
+        </View>
       </Header>
       
       <BookingsList navigateTo={navigateTo}/>
