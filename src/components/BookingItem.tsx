@@ -1,21 +1,15 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { colores } from "../theme/appTheme"
+import { bookingInterface } from "../data/bookings"
 
-interface Props{
-  tour: string,
-  customerId: string,
-  customerName: string,
-  nTravelers?: number
-}
-
-export const BookingItem = ({tour, customerId, customerName, nTravelers}: Props) => {
+export const BookingItem = ({tour, customer, nTravelers}: bookingInterface) => {
   return (
     <TouchableOpacity
       onPress={() => {}}
     >
       <View style={styles.container}>
         <Text style={styles.customerText}>
-          {customerName}
+          {customer.name}
         </Text>
         <View style={styles.content}>
           <Text>
