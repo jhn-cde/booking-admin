@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { ScrollView, View } from "react-native"
 import { DateContext } from "../context/DateContext"
 import { BookingItem } from "./BookingItem"
-import { getBookingsByTourDate } from "../selector/getBookingByTourDate"
+import { getBookingsByTourDate } from "../helpers/getBookingByTourDate"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 export const BookingsList = () => {
