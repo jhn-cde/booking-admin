@@ -34,7 +34,11 @@ const groupByDate = (ungrouped: bookingInterface[]) => {
   return grouped
 }
 
-export const BookingsList = () => {
+interface Props{
+  navigateTo: (id: string) => void
+}
+
+export const BookingsList = ({navigateTo}: Props) => {
   const { dateState } = useContext(DateContext)
 
   let bookings = getBookinsByState('pendiente', dateState.curDate)
@@ -56,7 +60,7 @@ export const BookingsList = () => {
                     {date}
                   </Text>
                   {bookings.map(
-                    (booking) => <BookingItem key={booking.id} {...booking}/>
+                    (booking) => <BookingItem key={booking.id} {...booking} navigateTo={navigateTo}/>
                   )}
                 </View>
               )

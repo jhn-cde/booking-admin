@@ -1,14 +1,30 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack"
+import { useEffect } from "react"
 import { Text, View } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { getBookingById } from "../helpers/getBookingById"
+import { RootStackParams } from "../navigator/StackNavigator"
 import { colores, styles } from "../theme/appTheme"
 
-export const BookingScreen = () => {
-  const {top: paddingTop} = useSafeAreaInsets()
+interface Props extends NativeStackScreenProps<RootStackParams, 'Booking'>{}
+
+export const BookingScreen = ({route, navigation}: Props) => {
+  
+  let booking = getBookingById(route.params.id) 
+
+  useEffect(() => { 
+    navigation.setOptions({
+      title: booking?.tour + ' - ' + booking?.customer.name,
+      headerTitleStyle:{
+        color: colores.secondary
+      },
+      headerShadowVisible: false,
+    });
+  }, [navigation])
+
   return (
     <View
       style={{
-        ...styles.globalPadding, 
-        paddingTop,
+        ...styles.globalPadding,
         backgroundColor: colores.primary,
         flex: 1
       }}
@@ -18,7 +34,7 @@ export const BookingScreen = () => {
         color: colores.secondary,
         fontWeight: '500'
       }}>
-        Customers
+        Booking {route.params.id}
       </Text>
     </View>
   )

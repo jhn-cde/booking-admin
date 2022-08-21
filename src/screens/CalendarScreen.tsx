@@ -1,19 +1,28 @@
 import { useContext, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { colores, styles } from "../theme/appTheme"
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Icon from '@expo/vector-icons/Ionicons';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { format } from 'date-fns'
 
 //componentes
+import { colores, styles } from "../theme/appTheme"
 import { FloatingButton } from "../components/FloatingButton"
 import { BookingsList } from "../components/BookingsList"
 import { Header } from "../components/Header"
 import { DateContext, DateProvider } from "../context/DateContext";
+import { RootStackParams } from "../navigator/StackNavigator";
 
-export const CalendarScreen = () => {
+type Props = NativeStackScreenProps<RootStackParams, 'Tabs'>;
+
+export const CalendarScreen = ({navigation}: Props) => {
+  
   const { dateState, setDate } = useContext(DateContext)
+
+  const navigateTo = (id: string) => {
+    navigation.navigate('Booking', {id: id})
+  }
 
   const onChange = (event: object, selectedDate: any) => {
     const currentDate = selectedDate;
@@ -56,16 +65,16 @@ export const CalendarScreen = () => {
         </TouchableOpacity>
       </Header>
       
-      <BookingsList />
+      <BookingsList navigateTo={navigateTo}/>
       <FloatingButton />
     </View>
   )
 }
 
-export const CalendarState = ({children}: any) => {
+export const CalendarState = ({route, navigation}: Props) => {
   return (
     <DateProvider>
-      <CalendarScreen />
+      <CalendarScreen route={route} navigation={navigation}/>
     </DateProvider>
   )
 }
