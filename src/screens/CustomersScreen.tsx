@@ -1,8 +1,14 @@
-import { Text, View } from "react-native"
+import { View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParams } from "../navigator/StackNavigator";
 import { colores, styles } from "../theme/appTheme"
 
-export const CustomersScreen = () => {
+import { Header } from "../components/Header"
+
+type Props = NativeStackScreenProps<RootStackParams, 'Tabs'>;
+
+const CustomersScreen = ({navigation}: Props) => {
   const {top: paddingTop} = useSafeAreaInsets()
   return (
     <View
@@ -13,13 +19,15 @@ export const CustomersScreen = () => {
         flex: 1
       }}
     >
-      <Text style={{
-        ...styles.title,
-        color: colores.secondary,
-        fontWeight: '500'
-      }}>
-        Customers
-      </Text>
+      <Header title={'Clientes'}>
+        {}
+      </Header>
     </View>
+  )
+}
+
+export const CustomersScreenState = ({route, navigation}: Props) => {
+  return(
+    <CustomersScreen route={route} navigation={navigation}/>
   )
 }
