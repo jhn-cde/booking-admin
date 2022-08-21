@@ -1,16 +1,13 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 
-import { CalendarScreen, CalendarState } from '../screens/CalendarScreen'
+import { CalendarState } from '../screens/CalendarScreen'
 import { CustomersScreen } from '../screens/CustomersScreen'
-import { NavigationContainer } from '@react-navigation/native';
 import { colores } from '../theme/appTheme';
 
 export const Tabs = () => {
   return (
-    <NavigationContainer>
       <TabsAndroid/>
-    </NavigationContainer>
   )
 }
 
