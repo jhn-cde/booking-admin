@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import { colores } from "../theme/appTheme"
-import { bookingInterface, bookings } from "../data/bookings"
+import { colores, styles } from "../theme/appTheme"
+import { bookingInterface } from "../data/bookings"
 
 interface itemInterface extends bookingInterface{
   navigateTo: (id:string) => void
@@ -16,20 +16,20 @@ export const BookingItem = ({id, tour, customer, nTravelers, navigateTo}: itemIn
     <TouchableOpacity
       onPress={navigate}
     >
-      <View style={styles.container}>
-        <Text style={styles.customerText}>
+      <View style={customStyles.container}>
+        <Text style={customStyles.customerText}>
           {customer.name}
         </Text>
-        <View style={styles.content}>
+        <View style={customStyles.content}>
           <Text>
-            <Text style={styles.tourText}>
+            <Text style={customStyles.tourText}>
               {tour}
             </Text>
-            <Text style={styles.nTravelersText}> 
+            <Text style={customStyles.nTravelersText}> 
               {nTravelers && ' - '+nTravelers+' pasajeros'}
             </Text>
           </Text>
-          <Text style={styles.moreText}> 
+          <Text style={customStyles.moreText}> 
             Ver más...
           </Text>
         </View>
@@ -38,7 +38,7 @@ export const BookingItem = ({id, tour, customer, nTravelers, navigateTo}: itemIn
   )
 }
 
-const styles = StyleSheet.create({
+const customStyles = StyleSheet.create({
   container:{
     marginVertical: 4,
     paddingVertical: 4,
@@ -58,13 +58,11 @@ const styles = StyleSheet.create({
   },
 
   tourText:{
-    color: colores.text,
+    ...styles.text,
     fontWeight: '600',
-    fontSize: 14
   },
   nTravelersText:{
-    color: colores.text,
-    fontWeight: '400',
+    ...styles.text,
     fontSize: 12
 
   },

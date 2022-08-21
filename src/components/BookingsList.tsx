@@ -5,7 +5,7 @@ import { DateContext } from "../context/DateContext"
 import { BookingItem } from "./BookingItem"
 import { getBookinsByState } from "../helpers/getBookingsByState"
 import { bookingInterface } from "../data/bookings"
-import { colores } from "../theme/appTheme"
+import { colores, styles } from "../theme/appTheme"
 
 interface groupedInterface{
   date: string,
@@ -53,7 +53,7 @@ export const BookingsList = ({navigateTo}: Props) => {
               return (
                 <View key={date}>
                   <Text style={{
-                    ...customStyles.dateText,
+                    ...styles.subtitle,
                     marginTop: index === 0 ? 0: 60,
                   }}>
                     {date}
@@ -76,10 +76,5 @@ const customStyles = StyleSheet.create({
     flex:1, 
     flexDirection: 'row', 
     alignItems: 'flex-end'
-  },
-  dateText: {
-    fontSize: 20,
-    fontWeight: '500',
-    color: colores.acento
   }
 })

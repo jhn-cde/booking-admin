@@ -27,13 +27,13 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     marginBottom: 10
   },
-  copyrightContainer:{
-    alignSelf: 'center',
-    flex: 1,
-    justifyContent: 'flex-end',
-    marginBottom: 20
+  subtitle:{
+    fontSize: 20,
+    fontWeight: '500',
+    color: colores.acento
   },
-  copyrightText:{
-    fontSize: 15
+  text:{
+    color: colores.text,
+    fontSize: 14
   }
 })
