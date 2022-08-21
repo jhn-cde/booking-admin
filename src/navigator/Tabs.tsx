@@ -4,16 +4,9 @@ import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { CalendarState } from '../screens/CalendarScreen'
 import { CustomersScreen } from '../screens/CustomersScreen'
 import { colores } from '../theme/appTheme';
-
-export const Tabs = () => {
-  return (
-      <TabsAndroid/>
-  )
-}
-
 const TabAndroid = createMaterialBottomTabNavigator();
 
-const TabsAndroid = () => {
+export const Tabs = () => {
   return(
     <TabAndroid.Navigator
       barStyle={{backgroundColor: colores.secondary}}
