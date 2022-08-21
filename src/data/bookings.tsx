@@ -10,7 +10,8 @@ export interface bookingInterface{
   nTravelers: number,
   bookingDate: string,
   tourDate: string,
-  customer: userInterface
+  customer: userInterface,
+  state: string
 }
 
 export const bookings = [
@@ -25,7 +26,8 @@ export const bookings = [
       name: 'Will A. M',
       phone: '+19999192',
       email: 'willam@gmail.com',
-    }
+    },
+    state: 'finalizado'
   },
   {
     id: '2',
@@ -38,46 +40,50 @@ export const bookings = [
       name: 'Elizabeth',
       phone: '+19999192',
       email: 'willam@gmail.com',
-    }
+    },
+    state: 'finalizado'
   },
   {
     id: '3',
     tour: 'Manu',
     nTravelers: 1,
     bookingDate: '2022/06/20',
-    tourDate: '2022/08/21',
+    tourDate: '2022/09/21',
     customer: {
       nDoc: '1236',
       name: 'Albus',
       phone: '+19999192',
       email: 'willam@gmail.com',
-    }
+    },
+    state: 'pendiente'
   },
   {
     id: '4',
     tour: 'Manu',
     nTravelers: 1,
     bookingDate: '2022/06/20',
-    tourDate: '2022/08/21',
+    tourDate: '2022/09/21',
     customer: {
       nDoc: '1237',
       name: 'Grind',
       phone: '+19999192',
       email: 'willam@gmail.com',
-    }
+    },
+    state: 'pendiente'
   },
   {
     id: '5',
     tour: 'Manu',
     nTravelers: 1,
     bookingDate: '2022/06/20',
-    tourDate: '2022/08/21',
+    tourDate: '2022/09/21',
     customer: {
       nDoc: '1238',
       name: 'Newt',
       phone: '+19999192',
       email: 'newt@gmail.com',
-    }
+    },
+    state: 'pendiente'
   },
   {
     id: '6',
@@ -90,7 +96,8 @@ export const bookings = [
       name: 'Frodo',
       phone: '+19999192',
       email: 'bolson@gmail.com',
-    }
+    },
+    state: 'pendiente'
   },
   {
     id: '7',
@@ -103,7 +110,8 @@ export const bookings = [
       name: 'Smeagol',
       phone: '+19999192',
       email: 'miprecioso@gmail.com',
-    }
+    },
+    state: 'pendiente'
   },
   {
     id: '8',
@@ -116,7 +124,8 @@ export const bookings = [
       name: 'Aragorn',
       phone: '+19999192',
       email: 'araghunters@gmail.com',
-    }
+    },
+    state: 'pendiente'
   },
   {
     id: '9',
@@ -129,7 +138,8 @@ export const bookings = [
       name: 'Avicii',
       phone: '+19999192',
       email: 'avicii@gmail.com',
-    }
+    },
+    state: 'pendiente'
   },
   {
     id: '10',
@@ -142,7 +152,8 @@ export const bookings = [
       name: 'Mike',
       phone: '+19999192',
       email: 'posner@gmail.com',
-    }
+    },
+    state: 'cancelado'
   },
   {
     id: '11',
@@ -155,7 +166,8 @@ export const bookings = [
       name: 'Martin',
       phone: '+19999192',
       email: 'garrix@gmail.com',
-    }
+    },
+    state: 'pendiente'
   },
   {
     id: '12',
@@ -168,7 +180,8 @@ export const bookings = [
       name: 'Sonny',
       phone: '+19999192',
       email: 'skrillex@gmail.com',
-    }
+    },
+    state: 'pendiente'
   },
   {
     id: '13',
@@ -181,7 +194,8 @@ export const bookings = [
       name: 'Martin',
       phone: '+19999192',
       email: 'garrix@gmail.com',
-    }
+    },
+    state: 'pendiente'
   },
   {
     id: '14',
@@ -194,7 +208,8 @@ export const bookings = [
       name: 'David',
       phone: '+19999192',
       email: 'gueta@gmail.com',
-    }
+    },
+    state: 'pendiente'
   },
   {
     id: '15',
@@ -207,6 +222,7 @@ export const bookings = [
       name: 'Kygo',
       phone: '+19999192',
       email: 'kygo@gmail.com',
-    }
+    },
+    state: 'pendiente'
   },
 ]
