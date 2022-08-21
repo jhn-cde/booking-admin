@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -16,7 +16,7 @@ import { RootStackParams } from "../navigator/StackNavigator";
 
 type Props = NativeStackScreenProps<RootStackParams, 'Tabs'>;
 
-export const CalendarScreen = ({navigation}: Props) => {
+const CalendarScreen = ({navigation}: Props) => {
   
   const { dateState, setDate } = useContext(DateContext)
 
@@ -72,14 +72,13 @@ export const CalendarScreen = ({navigation}: Props) => {
   )
 }
 
-export const CalendarState = ({route, navigation}: Props) => {
+export const CalendarScreenState = ({route, navigation}: Props) => {
   return (
     <DateProvider>
       <CalendarScreen route={route} navigation={navigation}/>
     </DateProvider>
   )
 }
-
 
 const customStyles = StyleSheet.create({
   text:{
