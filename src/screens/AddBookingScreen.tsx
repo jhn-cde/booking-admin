@@ -1,10 +1,13 @@
-import { Button, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 import { DropDown } from "../components/DropDown";
-import { bookingInterface } from "../data/bookings";
+import { bookingInterface, customerInterface } from "../data/bookings";
 import { colores, styles } from "../theme/appTheme";
 import { useForm } from "../hooks/useForm";
 import { DatePicker } from "../components/DatePicker";
+import { useContext } from "react";
+import { BookingsContext } from "../context/BookingsContext";
+import { format } from "date-fns";
 
 const tours = [
   'Manu',
@@ -34,12 +37,31 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
     email: ''
   })
 
+  const { bookingsState, addBooking } = useContext(BookingsContext)
+
   const onTourSelect = (val: string) => {
     handleTourChange({name: 'tour', value: val})
   }
 
   const onStateSelect = (val: string) => {
     handleTourChange({name: 'state', value: val})
+  }
+
+  const saveBooking = () => {
+    console.log('bookings: ',bookingsState.bookings.length)
+    
+    let newBooking: bookingInterface
+    let customerData: customerInterface = customer
+    newBooking = {
+      id: tour.tour+bookingsState.bookings.length,
+      tour: tour.tour,
+      nTravelers: tour.nTravelers,
+      tourDate: format(tour.tourDate, 'd MMM, y'),
+      bookingDate: format(tour.bookingDate, 'd MMM, y'),
+      state: tour.state,
+      customer: customerData
+    }
+    addBooking(newBooking)
   }
 
   return(
@@ -171,6 +193,7 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
       <View style={customStyles.section}>
         <View style={{...customStyles.itemContainer, justifyContent:'flex-end'}}>
           <Pressable
+            onPress={saveBooking}
             style={({ pressed }) => [
               {
                 backgroundColor: pressed
