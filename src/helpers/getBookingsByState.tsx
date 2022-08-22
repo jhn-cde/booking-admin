@@ -5,7 +5,7 @@ import { bookingInterface } from "../data/bookings";
 export const getBookingsByState = (state: string, pbookings: bookingInterface[] | undefined) => {
   const { bookingsState } = useContext(BookingsContext)
 
-  const validStatus = ['cancelado','pendiente','finalizado'];
+  const validStatus = ['Cancelado','Pendiente','Finalizado'];
   if ( !validStatus.includes( state ) ) {
     console.log(`${ state } is not a valid state`);
     return []

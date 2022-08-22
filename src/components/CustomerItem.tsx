@@ -27,7 +27,7 @@ export const CustomerItem = ({name, nDoc, phone, email, tours, navigateTo}: item
         <View>
           <Text style={styles.text}>Tours pendientes</Text>
           <View style={{...customStyles.content, justifyContent: 'flex-start'}}>
-            {tours.filter(tour => tour.state==='pendiente').map(tour => {
+            {tours.filter(tour => tour.state==='Pendiente').map(tour => {
               return (
               <View key={tour.id} style={{marginRight: 10}}>
                 <TouchableOpacity

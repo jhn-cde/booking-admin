@@ -40,7 +40,7 @@ interface Props{
 export const BookingsList = ({navigateTo}: Props) => {
   const { dateState } = useContext(DateContext)
 
-  let bookings = getBookinsByStateDate('pendiente', dateState.curDate)
+  let bookings = getBookinsByStateDate('Pendiente', dateState.curDate)
 
   const grouped = groupByDate(bookings)
 
