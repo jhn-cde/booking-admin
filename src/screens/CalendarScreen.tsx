@@ -13,6 +13,7 @@ import { BookingsList } from "../components/BookingsList"
 import { Header } from "../components/Header"
 import { DateContext, DateProvider } from "../context/DateContext";
 import { RootStackParams } from "../navigator/StackNavigator";
+import { DatePicker } from "../components/DatePicker";
 
 type Props = NativeStackScreenProps<RootStackParams, 'Tabs'>;
 
@@ -26,20 +27,9 @@ const CalendarScreen = ({navigation}: Props) => {
   const navigateAddToBooking = () => {
     navigation.navigate('AddBooking')
   }
-
-  const onChange = (event: object, selectedDate: any) => {
-    const currentDate = selectedDate;
-    currentDate && setDate(currentDate);
-  };
-
-  const showDatepicker = () => {
-    DateTimePickerAndroid.open({
-      value: dateState.curDate,
-      onChange,
-      mode: 'date',
-      is24Hour: true,
-    });
-  };
+  const onDateChange = (newDate: Date | undefined) => {
+    newDate && setDate(newDate);
+  }
 
 
   const {top: paddingTop} = useSafeAreaInsets()
@@ -55,17 +45,10 @@ const CalendarScreen = ({navigation}: Props) => {
       <Header title='Calendario'>
         <View style={customStyles.date}>
           <Text style={customStyles.text}>Reservas Pendientes</Text>
-          <TouchableOpacity
-            onPress={showDatepicker}
-          >
-            <Text style={customStyles.dateContent}>
-              {format(dateState.curDate, 'd MMM, y')}  <Icon
-                name="calendar-outline"
-                color={colores.secondary}
-                size={20}
-              />
-            </Text>
-          </TouchableOpacity>
+          <DatePicker
+            date={dateState.curDate}
+            changeDate={onDateChange}
+          />
         </View>
       </Header>
       
