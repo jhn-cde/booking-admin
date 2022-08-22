@@ -1,14 +1,14 @@
 export interface customerInterface{
   nDoc: string,
   name: string,
-  phone: string,
-  email: string
+  phone?: string,
+  email?: string
 }
 export interface bookingInterface{
   id: string,
   tour: string,
   nTravelers: number,
-  bookingDate: string,
+  bookingDate?: string,
   tourDate: string,
   customer: customerInterface,
   state: string
