@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 import { DropDown } from "../components/DropDown";
 import { bookingInterface } from "../data/bookings";
@@ -46,20 +46,28 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
     <View
       style={{...styles.globalPadding}}
     >
+      
+      {/* --------- Section Tour */}
       <View style={customStyles.section}>
         <Text style={customStyles.sectionTitle}>Datos del tour</Text>
         <View style={customStyles.itemContainer}>
           <Text style={customStyles.label}>Nombre:</Text>
           <View style={{...customStyles.inputContainer}}>
-            <DropDown data={tours} onSelect={onTourSelect} value={tour.tour} placeHolder='Nombre de tour'/>
+            <DropDown
+              data={tours}
+              onSelect={onTourSelect}
+              value={tour.tour}
+              placeHolder='Nombre de tour'
+              editable={true}
+            />
           </View>
         </View>
 
         <View style={customStyles.itemContainer}>
           <Text style={customStyles.label}>Nro personas: </Text>
-          <View style={{...customStyles.inputContainer}}>
+          <View style={customStyles.inputContainer}>
             <TextInput
-              style={customStyles.input}
+              style={{...customStyles.input, width: 50}}
               placeholder="1"
               keyboardType="numeric"
               defaultValue={tour.nTravelers}
@@ -79,7 +87,6 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
           </View>
         </View>
 
-
         <View style={customStyles.itemContainer}>
           <Text style={customStyles.label}>Fecha salida: </Text>
           <View style={customStyles.inputContainer}>
@@ -91,15 +98,21 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
           </View>
         </View>
 
-
         <View style={customStyles.itemContainer}>
           <Text style={customStyles.label}>Estado:</Text>
           <View style={{...customStyles.inputContainer}}>
-            <DropDown data={states} onSelect={onStateSelect} value={tour.state} placeHolder='Estado'/>
+            <DropDown
+              data={states}
+              onSelect={onStateSelect}
+              value={tour.state}
+              placeHolder='Estado'
+              editable={false}
+            />
           </View>
         </View>
       </View>
 
+      {/* --------- Section customer */}
       <View style={customStyles.section}>
         <Text style={customStyles.sectionTitle}>Dato de Cliente</Text>
         <View style={{...customStyles.itemContainer}}>
@@ -153,6 +166,26 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
           </View>
         </View>
       </View>
+
+      {/* --------- Section customer*/}
+      <View style={customStyles.section}>
+        <View style={{...customStyles.itemContainer, justifyContent:'flex-end'}}>
+          <Pressable
+            style={({ pressed }) => [
+              {
+                backgroundColor: pressed
+                ? colores.acento2
+                : colores.acento
+              },
+              customStyles.button
+            ]}
+          >
+            {({ pressed }) => (
+              <Text style={customStyles.buttonText}>Guardar</Text>
+            )}
+          </Pressable>
+        </View>
+      </View>
     </View>
   )
 }
@@ -162,7 +195,8 @@ const customStyles = StyleSheet.create({
     marginBottom: 40
   },
   sectionTitle:{
-    ...styles.subtitle
+    ...styles.subtitle,
+    color: colores.secondary
   },
   itemContainer:{
     marginBottom: 10,
@@ -186,4 +220,19 @@ const customStyles = StyleSheet.create({
     ...styles.text,
     fontSize: 16
   },
+  button:{
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+  },
+  buttonText:{
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: colores.primary
+  }
 })

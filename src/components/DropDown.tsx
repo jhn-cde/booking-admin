@@ -10,21 +10,37 @@ interface Props{
   data: string[],
   value: string,
   onSelect: (val: string) => void,
-  placeHolder: string
+  placeHolder: string,
+  editable: boolean
 }
 
-export const DropDown = ({data, value, onSelect, placeHolder}: Props) => {
+export const DropDown = ({data, value, onSelect, placeHolder, editable}: Props) => {
   const [shownOption, setShownOption] = useState(false)
+
+  const onPresss = (val: string) => {
+    setShownOption(!shownOption)
+    onSelect(val)
+  }
 
   return(
     <>
+      {
+        editable
+        ? <View>
         <TextInput
-          style={customStyles.input}
-          placeholder={placeHolder}
-          onFocus={() => setShownOption(!shownOption)}
-          onBlur={() => setShownOption(!shownOption)}
-          defaultValue={value}
-        />
+            style={customStyles.input}
+            placeholder={placeHolder}
+            defaultValue={value}
+            onFocus={() => setShownOption(!shownOption)}
+          /></View>
+        : <TouchableOpacity
+            onPress={() => setShownOption(!shownOption)}
+          >
+            <Text style={customStyles.input}>
+              {value}
+            </Text>
+          </TouchableOpacity>
+      }
       <View style={customStyles.optionsContainer}>
         {shownOption && <View style={customStyles.optionsBox}>
           <ScrollView
@@ -35,7 +51,7 @@ export const DropDown = ({data, value, onSelect, placeHolder}: Props) => {
               return(
                 <TouchableOpacity
                   key={String(i)}
-                  onPress={() => onSelect(val)}
+                  onPress={() => onPresss(val)}
                   style={{...customStyles.touchable,
                     backgroundColor: value==val 
                     ?colores.secondary : colores.opacity,
