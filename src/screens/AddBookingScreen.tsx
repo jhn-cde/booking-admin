@@ -48,8 +48,6 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
   }
 
   const saveBooking = () => {
-    console.log('bookings: ',bookingsState.bookings.length)
-    
     let newBooking: bookingInterface
     let customerData: customerInterface = customer
     newBooking = {

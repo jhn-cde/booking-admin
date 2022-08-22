@@ -1,6 +1,6 @@
-import { Pressable, StyleSheet, TouchableNativeFeedback, View } from "react-native"
+import { Pressable, StyleSheet, View } from "react-native"
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-import { colores, tema } from "../theme/appTheme";
+import { colores } from "../theme/appTheme";
 
 interface Props {
   navigateTo: () => void
