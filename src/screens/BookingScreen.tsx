@@ -16,8 +16,9 @@ export const BookingScreen = ({route, navigation}: Props) => {
 
   useEffect(() => { 
     navigation.setOptions({
-      title: 'Booking ' + booking?.id,
+      title: 'Booking - Id ' + booking?.id,
       headerTitleStyle:{
+        ...styles.title,
         color: colores.secondary
       },
       headerShadowVisible: false,
@@ -61,7 +62,7 @@ export const BookingScreen = ({route, navigation}: Props) => {
           <Text style={customStyles.subsection}>
             <Text style={customStyles.cat}>Fecha de reserva: </Text>
             <Text style={customStyles.value}>
-              {booking? format(new Date(booking.bookingDate), 'd MMM, y'): ''}
+              {booking && booking.bookingDate? format(new Date(booking.bookingDate), 'd MMM, y'): ''}
             </Text>                
           </Text>
         </View>
