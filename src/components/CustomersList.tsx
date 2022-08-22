@@ -1,5 +1,6 @@
+import { useContext } from "react"
 import { ScrollView, StyleSheet, Text, View } from "react-native"
-import { bookings } from "../data/bookings"
+import { TextContext } from "../context/TextContext"
 import { getCustomers } from "../helpers/getCustomers"
 import { CustomerItem } from "./CustomerItem"
 
@@ -8,7 +9,9 @@ interface Props{
 }
 
 export const CustomersList = ({navigateTo}: Props) => {
-  const customers = getCustomers()
+  const { textState } = useContext(TextContext)
+
+  const customers = getCustomers(textState.curText)
   return(
     <View style={customStyles.container}>
       <ScrollView>
@@ -18,7 +21,7 @@ export const CustomersList = ({navigateTo}: Props) => {
               return(
                 <View
                   key={customer.nDoc}
-                  style={{marginTop: index === 0 ?0 :10}}
+                  style={{marginTop: index === 0 ?0 :20}}
                 >
                   <CustomerItem {...customer} navigateTo={navigateTo}/>
                 </View>

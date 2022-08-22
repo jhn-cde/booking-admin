@@ -54,7 +54,7 @@ export const BookingsList = ({navigateTo}: Props) => {
                 <View key={date}>
                   <Text style={{
                     ...styles.subtitle,
-                    marginTop: index === 0 ? 0: 60,
+                    marginTop: index === 0 ? 0: 25,
                   }}>
                     {date}
                   </Text>

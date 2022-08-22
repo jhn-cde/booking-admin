@@ -10,7 +10,10 @@ export interface customerDataInterface extends customerInterface{
   tours: toursInterface[]
 }
 
-export const getCustomers = () => {  
+export const getCustomers = (text: string) => {
+
+  console.log(text)
+
   let lista: customerDataInterface[]
   lista = []
   bookings.map(booking => {
@@ -24,5 +27,8 @@ export const getCustomers = () => {
 
   lista.sort((a, b) => a.name.localeCompare(b.name))
 
-  return lista
+  if(text === '')
+    return lista
+  else
+    return lista.filter(customer => customer.name.toLowerCase().includes(text.toLowerCase()))
 }

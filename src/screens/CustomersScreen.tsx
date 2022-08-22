@@ -6,6 +6,8 @@ import { colores, styles } from "../theme/appTheme"
 
 import { Header } from "../components/Header"
 import { CustomersList } from "../components/CustomersList";
+import { SearchBar } from "../components/SearchBar";
+import { TextProvider } from "../context/TextContext";
 
 type Props = NativeStackScreenProps<RootStackParams, 'Tabs'>;
 
@@ -26,7 +28,7 @@ const CustomersScreen = ({navigation}: Props) => {
       }}
     >
       <Header title={'Clientes'}>
-        {}
+        <SearchBar />
       </Header>
       
       <CustomersList navigateTo={navigateTo}/>
@@ -37,6 +39,8 @@ const CustomersScreen = ({navigation}: Props) => {
 
 export const CustomersScreenState = ({route, navigation}: Props) => {
   return(
-    <CustomersScreen route={route} navigation={navigation}/>
+    <TextProvider>
+      <CustomersScreen route={route} navigation={navigation}/>
+    </TextProvider>
   )
 }
