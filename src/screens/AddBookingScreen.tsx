@@ -46,6 +46,16 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
     handleTourChange({name: 'state', value: val})
   }
 
+  const changeBookingDate = (newDate: Date | undefined) => {
+    console.log('dada1' ,newDate)
+    handleTourChange({name: 'bookingDate', value: newDate});
+  }
+
+  const changeTourDate = (newDate: Date | undefined) => {
+    console.log('dada2' ,newDate)
+    handleTourChange({name: 'tourDate', value: newDate});
+  }
+
   const saveBooking = () => {
     let newBooking: bookingInterface
     let customerData: customerInterface = customer
@@ -101,9 +111,8 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
             <Text style={customStyles.label}>Fecha reserva: </Text>
             <View style={customStyles.inputContainer}>
               <DatePicker
-                name='bookingDate'
                 date={tour.bookingDate}
-                handleChange={handleTourChange}
+                changeDate={changeBookingDate}
               />
             </View>
           </View>
@@ -112,9 +121,8 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
             <Text style={customStyles.label}>Fecha salida: </Text>
             <View style={customStyles.inputContainer}>
               <DatePicker
-                name='tourDate'
                 date={tour.tourDate}
-                handleChange={handleTourChange}
+                changeDate={changeTourDate}
               />
             </View>
           </View>

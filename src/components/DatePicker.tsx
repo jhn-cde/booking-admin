@@ -4,21 +4,16 @@ import Icon from '@expo/vector-icons/Ionicons';
 import { format } from 'date-fns'
 import { colores } from "../theme/appTheme";
 
-interface params{
-  name: string,
-  value: Date | undefined
-}
 interface Props{
-  name: string,
   date: Date,
-  handleChange: ({name, value}: params) => void
+  changeDate: (value: Date | undefined) => void
 }
 
-export const DatePicker = ({name, date, handleChange}: Props) => {
+export const DatePicker = ({date, changeDate}: Props) => {
   
   const onChange = (event: DateTimePickerEvent, selectedDate: Date | undefined) => {
     const currentDate = selectedDate;
-    handleChange({name, value: currentDate});
+    changeDate(currentDate);
   }
 
   const showDatepicker = () => {
