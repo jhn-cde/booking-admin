@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, View } from "react-native";
 
 import { DropDown } from "../components/DropDown";
 import { bookingInterface, customerInterface } from "../data/bookings";
@@ -21,7 +21,7 @@ const states = [
 ]
 
 export const AddBookingScreen = (booking?: bookingInterface) => {
-  const [tour, handleTourChange] = useForm({
+  const [tour, handleTourChange, tourInitialState] = useForm({
     id: 'id',
     tour: tours[0],
     nTravelers: 1,
@@ -29,7 +29,7 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
     tourDate: new Date(),
     state: states[0]
   })
-  const [customer, handleCustomerChange] = useForm({
+  const [customer, handleCustomerChange, customerInitialState] = useForm({
     nDoc: '',
     name: '',
     phone: '',
@@ -47,12 +47,10 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
   }
 
   const changeBookingDate = (newDate: Date | undefined) => {
-    console.log('dada1' ,newDate)
     handleTourChange({name: 'bookingDate', value: newDate});
   }
 
   const changeTourDate = (newDate: Date | undefined) => {
-    console.log('dada2' ,newDate)
     handleTourChange({name: 'tourDate', value: newDate});
   }
 
@@ -69,6 +67,16 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
       customer: customerData
     }
     addBooking(newBooking)
+    
+    // Mensaje de booking guardado correctamente
+    ToastAndroid.show(
+      newBooking.tour+'-'+newBooking.customer.name+', se guardó correctamente con id: '+newBooking.id,
+      ToastAndroid.LONG
+    )
+    // reestablecer tour values
+    tourInitialState()
+    //reestablecer customer values
+    customerInitialState()
   }
 
   return(
@@ -189,8 +197,6 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
                 placeholder='Email'
                 defaultValue={customer.email}
                 onChangeText={(text) => handleCustomerChange({name:'email', value:text})}
-                keyboardType= 'email-address'
-                caretHidden={false}
               />
             </View>
           </View>
