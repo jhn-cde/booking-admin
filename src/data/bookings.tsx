@@ -27,7 +27,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'willam@gmail.com',
     },
-    state: 'finalizado'
+    state: 'Finalizado'
   },
   {
     id: '2',
@@ -41,7 +41,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'willam@gmail.com',
     },
-    state: 'finalizado'
+    state: 'Finalizado'
   },
   {
     id: '3',
@@ -55,7 +55,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'willam@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
   {
     id: '4',
@@ -69,7 +69,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'willam@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
   {
     id: '5',
@@ -83,7 +83,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'newt@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
   {
     id: '6',
@@ -97,7 +97,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'bolson@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
   {
     id: '7',
@@ -111,7 +111,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'miprecioso@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
   {
     id: '8',
@@ -125,7 +125,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'araghunters@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
   {
     id: '9',
@@ -139,7 +139,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'avicii@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
   {
     id: '10',
@@ -153,7 +153,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'posner@gmail.com',
     },
-    state: 'cancelado'
+    state: 'Cancelado'
   },
   {
     id: '11',
@@ -167,7 +167,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'garrix@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
   {
     id: '12',
@@ -181,7 +181,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'skrillex@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
   {
     id: '13',
@@ -195,7 +195,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'garrix@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
   {
     id: '14',
@@ -209,7 +209,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'gueta@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
   {
     id: '15',
@@ -223,7 +223,7 @@ export const bookings = [
       phone: '+19999192',
       email: 'kygo@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
   {
     id: '16',
@@ -237,6 +237,6 @@ export const bookings = [
       phone: '+19999192',
       email: 'willam@gmail.com',
     },
-    state: 'pendiente'
+    state: 'Pendiente'
   },
 ]
