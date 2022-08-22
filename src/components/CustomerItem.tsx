@@ -24,9 +24,9 @@ export const CustomerItem = ({name, nDoc, phone, email, tours, navigateTo}: item
         <Icon name="mail-outline"/> {email}
       </Text>
       <View style={{...customStyles.content, marginTop: 10,}}>
-        <View>
+        <View style={{maxWidth: '60%'}}>
           <Text style={styles.text}>Tours pendientes</Text>
-          <ScrollView horizontal={true}>
+          <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
             {tours.filter(tour => tour.state==='Pendiente').map(tour => {
               return (
               <View key={tour.id} style={{marginRight: 10}}>
