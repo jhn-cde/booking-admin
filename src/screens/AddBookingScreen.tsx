@@ -25,7 +25,7 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
   const [tour, handleTourChange] = useForm({
     id: 'id',
     tour: tours[0],
-    nTravelers: 4,
+    nTravelers: 1,
     bookingDate: new Date(),
     tourDate: new Date(),
     state: states[0]
@@ -51,11 +51,11 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
     let newBooking: bookingInterface
     let customerData: customerInterface = customer
     newBooking = {
-      id: tour.tour+bookingsState.bookings.length,
+      id: ''+tour.tourDate.getDate()+bookingsState.bookings.length+tour.tour.split(' ')[0],
       tour: tour.tour,
       nTravelers: tour.nTravelers,
-      tourDate: format(tour.tourDate, 'd MMM, y'),
-      bookingDate: format(tour.bookingDate, 'd MMM, y'),
+      tourDate: tour.tourDate.toLocaleDateString(),
+      bookingDate: tour.bookingDate.toLocaleDateString(),
       state: tour.state,
       customer: customerData
     }
