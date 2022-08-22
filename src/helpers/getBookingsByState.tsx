@@ -21,6 +21,8 @@ export const getBookinsByStateDate = ( state: string, date: Date | undefined = u
     bookingsCopy = bookings.filter(booking => new Date(booking.tourDate) >= date)
   }
 
+  bookingsCopy.sort((a, b) => a.tourDate.localeCompare(b.tourDate))
+
   return getBookingsByState(state, bookingsCopy)
 }
 
