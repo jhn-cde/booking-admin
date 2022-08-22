@@ -30,8 +30,9 @@ const customStyles = StyleSheet.create({
   },
   input:{
     fontSize: 20,
-    borderColor: colores.text,
+    borderColor: colores.border,
     borderBottomWidth: 1,
     height: '100%',
+    color: colores.text
   }
 })
