@@ -2,14 +2,23 @@ import { StyleSheet, TouchableNativeFeedback, View } from "react-native"
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { colores, tema } from "../theme/appTheme";
 
-export const FloatingButton = () => {
+interface Props {
+  navigateTo: () => void
+}
+
+export const FloatingButton = ({navigateTo}: Props) => {
+
+  const navigate = () => {
+    navigateTo()
+  }
+
   return(
     <View
       style={styles.botonContainer}
     >
       <TouchableNativeFeedback
         background={TouchableNativeFeedback.Ripple(colores.primary, false, 30)}
-        onPress={ () => {} }
+        onPress={ navigate }
       >
         <View style={styles.boton}>
           <Icon name="plus" color={'white'} size={35} />
