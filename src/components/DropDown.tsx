@@ -3,13 +3,13 @@ import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 
 import { colores, styles } from "../theme/appTheme"
 
 export interface dropdownInterface{
-  id: number, name: string
+  name: string
 }
 
 interface Props{
-  data: dropdownInterface[],
-  value: dropdownInterface | null,
-  onSelect: (val: dropdownInterface) => void,
+  data: string[],
+  value: string,
+  onSelect: (val: string) => void,
   placeHolder: string
 }
 
@@ -17,16 +17,14 @@ export const DropDown = ({data, value, onSelect, placeHolder}: Props) => {
   const [shownOption, setShownOption] = useState(false)
 
   return(
-    <View>
-      <View style={customStyles.inputContainer}>
+    <>
         <TextInput
           style={customStyles.input}
           placeholder={placeHolder}
           onFocus={() => setShownOption(!shownOption)}
           onBlur={() => setShownOption(!shownOption)}
-          defaultValue={value?.name}
+          defaultValue={value}
         />
-      </View>
       <View style={customStyles.optionsContainer}>
         {shownOption && <View style={customStyles.optionsBox}>
           <ScrollView
@@ -39,43 +37,29 @@ export const DropDown = ({data, value, onSelect, placeHolder}: Props) => {
                   key={String(i)}
                   onPress={() => onSelect(val)}
                   style={{...customStyles.touchable,
-                    backgroundColor: value?.id==val.id 
+                    backgroundColor: value==val 
                     ?colores.secondary : colores.opacity,
                   }}
                 >
                   <Text
                     style={{...customStyles.option,
-                      color: value?.id==val.id
+                      color: value==val
                       ?colores.primary: colores.text
                     }}
-                  >{val.name}</Text>
+                  >{val}</Text>
                 </TouchableOpacity>
               )
             })}
           </ScrollView>
         </View>}
       </View>
-    </View>
+    </>
   )
 }
 
 const customStyles = StyleSheet.create({
-  inputContainer:{
-    alignItems: 'center',
-    padding: 8,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    minHeight: 56,
-    borderRadius: 6,
-  },
   input:{
-    ...styles.text, 
-    fontSize: 20,
-    borderColor: colores.border,
-    borderBottomWidth: 1,
-    padding: 5,
-    paddingLeft: 0,
-    width: '100%',
+    ...styles.input,
   },
   optionsContainer:{
     position:'absolute',

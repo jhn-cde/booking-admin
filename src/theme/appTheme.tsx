@@ -39,5 +39,14 @@ export const styles = StyleSheet.create({
   text:{
     color: colores.text,
     fontSize: 15
+  },
+  input:{
+    color: colores.text,
+    fontSize: 18,
+    borderColor: colores.border,
+    borderBottomWidth: 1,
+    paddingVertical: 5,
+    paddingHorizontal: 3,
+    width: '100%',
   }
 })
