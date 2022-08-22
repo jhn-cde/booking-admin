@@ -8,6 +8,8 @@ const noche = {
   secondary: '#3066be',
   acento: '#feb500',
   text: '#ffffff',
+  border: '#555555',
+  opacity: '#111111'
 }
 
 const dia = {
@@ -15,6 +17,8 @@ const dia = {
   secondary: '#3066be',
   acento: '#feb500',
   text: '#000000',
+  border: '#aaaaaa',
+  opacity: '#eeeeee'
 }
 
 export const colores = tema == 'dia'? dia: noche
