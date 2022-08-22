@@ -50,11 +50,8 @@ export const BookingsList = ({navigateTo}: Props) => {
         data={grouped}
         keyExtractor={item => item.date}
         renderItem={({item}) => (
-          <View>
-            <Text style={{
-              ...styles.subtitle,
-              marginBottom: 25,
-            }}>
+          <View style={{marginBottom: 25}}>
+            <Text style={styles.subtitle}>
               {item.date}
             </Text>
             {item.bookings.map(
