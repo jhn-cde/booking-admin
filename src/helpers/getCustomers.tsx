@@ -1,4 +1,6 @@
-import { bookings, customerInterface } from "../data/bookings";
+import { useContext } from "react";
+import { BookingsContext } from "../context/BookingsContext";
+import { customerInterface } from "../data/bookings";
 
 interface toursInterface{
   id: string,
@@ -11,12 +13,11 @@ export interface customerDataInterface extends customerInterface{
 }
 
 export const getCustomers = (text: string) => {
-
-  console.log(text)
+  const { bookingsState } = useContext(BookingsContext)
 
   let lista: customerDataInterface[]
   lista = []
-  bookings.map(booking => {
+  bookingsState.bookings.map(booking => {
     const index = lista.findIndex(elem => elem.nDoc === booking.customer.nDoc)
 
     if(index === -1)

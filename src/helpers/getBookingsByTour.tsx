@@ -1,10 +1,13 @@
-import { bookings } from "../data/bookings";
+import { useContext } from "react";
+import { BookingsContext } from "../context/BookingsContext";
 
 export const getBookingsByCustomerName = (tour:string = '') => {
-  if(tour === '')
-    return bookings
+  const { bookingsState} = useContext(BookingsContext)
   
-  return bookings.filter(booking =>
+  if(tour === '')
+    return bookingsState.bookings
+  
+  return bookingsState.bookings.filter(booking =>
     booking.tour.toLowerCase().includes(tour.toLowerCase())
   )
 }

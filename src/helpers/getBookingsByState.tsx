@@ -1,7 +1,9 @@
-import { bookingInterface, bookings } from "../data/bookings";
-import { getBookingsByTourDate } from "./getBookingByTourDate";
+import { useContext } from "react";
+import { BookingsContext } from "../context/BookingsContext";
+import { bookingInterface } from "../data/bookings";
 
 export const getBookingsByState = (state: string, pbookings: bookingInterface[] | undefined) => {
+  const { bookingsState } = useContext(BookingsContext)
 
   const validStatus = ['cancelado','pendiente','finalizado'];
   if ( !validStatus.includes( state ) ) {
@@ -11,14 +13,15 @@ export const getBookingsByState = (state: string, pbookings: bookingInterface[] 
 
   if(pbookings !== undefined)
     return pbookings.filter( booking => booking.state === state )
-  return bookings.filter( booking => booking.state === state );
+  return bookingsState.bookings.filter( booking => booking.state === state );
 }
 
 export const getBookinsByStateDate = ( state: string, date: Date | undefined = undefined ) => {
-  let bookingsCopy = bookings
+  const { bookingsState} = useContext(BookingsContext)
+  let bookingsCopy = bookingsState.bookings
   if(date !== undefined){
     date.setHours(0, 0, 0, 0)
-    bookingsCopy = bookings.filter(booking => new Date(booking.tourDate) >= date)
+    bookingsCopy = bookingsState.bookings.filter(booking => new Date(booking.tourDate) >= date)
   }
 
   bookingsCopy.sort((a, b) => a.tourDate.localeCompare(b.tourDate))
