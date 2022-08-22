@@ -1,12 +1,13 @@
 import { Pressable, StyleSheet, View } from "react-native"
-import Icon from '@expo/vector-icons/MaterialCommunityIcons';
+import Icon from '@expo/vector-icons/Ionicons';
 import { colores } from "../theme/appTheme";
 
 interface Props {
-  navigateTo: () => void
+  navigateTo: () => void,
+  iconName: string
 }
 
-export const FloatingButton = ({navigateTo}: Props) => {
+export const FloatingButton = ({navigateTo, iconName}: Props) => {
 
   const navigate = () => {
     navigateTo()
@@ -29,7 +30,7 @@ export const FloatingButton = ({navigateTo}: Props) => {
         >
           {({ pressed }) => (
           <Icon
-            name="plus"
+            name={iconName}
             style={{
               ...styles.text,
             }}
