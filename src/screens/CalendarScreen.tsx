@@ -53,7 +53,10 @@ const CalendarScreen = ({navigation}: Props) => {
       </Header>
       
       <BookingsList navigateTo={navigateToBooking}/>
-      <FloatingButton navigateTo={navigateAddToBooking}/>
+      <FloatingButton
+        navigateTo={navigateAddToBooking}
+        iconName='add-outline'
+      />
     </View>
   )
 }
