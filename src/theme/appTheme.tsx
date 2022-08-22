@@ -7,6 +7,7 @@ const noche = {
   primary: '#000000',
   secondary: '#3066be',
   acento: '#feb500',
+  acento2: '#EAA100',
   text: '#ffffff',
   border: '#555555',
   opacity: '#111111'
@@ -16,6 +17,7 @@ const dia = {
   primary: '#ffffff',
   secondary: '#3066be',
   acento: '#feb500',
+  acento2: '#EAA100',
   text: '#000000',
   border: '#aaaaaa',
   opacity: '#eeeeee'
