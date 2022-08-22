@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 
 import { DropDown } from "../components/DropDown";
 import { bookingInterface, customerInterface } from "../data/bookings";
@@ -7,7 +7,6 @@ import { useForm } from "../hooks/useForm";
 import { DatePicker } from "../components/DatePicker";
 import { useContext } from "react";
 import { BookingsContext } from "../context/BookingsContext";
-import { format } from "date-fns";
 
 const tours = [
   'Manu',
@@ -66,147 +65,150 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
     <View
       style={{...styles.globalPadding}}
     >
-      
-      {/* --------- Section Tour */}
-      <View style={customStyles.section}>
-        <Text style={customStyles.sectionTitle}>Datos del tour</Text>
-        <View style={customStyles.itemContainer}>
-          <Text style={customStyles.label}>Nombre:</Text>
-          <View style={{...customStyles.inputContainer}}>
-            <DropDown
-              data={tours}
-              onSelect={onTourSelect}
-              value={tour.tour}
-              placeHolder='Nombre de tour'
-              editable={true}
-            />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+      >
+        {/* --------- Section Tour */}
+        <View style={customStyles.section}>
+          <Text style={customStyles.sectionTitle}>Datos del tour</Text>
+          <View style={customStyles.itemContainer}>
+            <Text style={customStyles.label}>Nombre:</Text>
+            <View style={{...customStyles.inputContainer}}>
+              <DropDown
+                data={tours}
+                onSelect={onTourSelect}
+                value={tour.tour}
+                placeHolder='Nombre de tour'
+                editable={true}
+              />
+            </View>
+          </View>
+
+          <View style={customStyles.itemContainer}>
+            <Text style={customStyles.label}>Nro personas: </Text>
+            <View style={customStyles.inputContainer}>
+              <TextInput
+                style={{...customStyles.input, width: 50}}
+                placeholder="1"
+                keyboardType="numeric"
+                defaultValue={tour.nTravelers}
+                onChangeText={(text) => handleTourChange({name:'nTravelers', value: text})}
+              />
+            </View>
+          </View>
+
+          <View style={customStyles.itemContainer}>
+            <Text style={customStyles.label}>Fecha reserva: </Text>
+            <View style={customStyles.inputContainer}>
+              <DatePicker
+                name='bookingDate'
+                date={tour.bookingDate}
+                handleChange={handleTourChange}
+              />
+            </View>
+          </View>
+
+          <View style={customStyles.itemContainer}>
+            <Text style={customStyles.label}>Fecha salida: </Text>
+            <View style={customStyles.inputContainer}>
+              <DatePicker
+                name='tourDate'
+                date={tour.tourDate}
+                handleChange={handleTourChange}
+              />
+            </View>
+          </View>
+
+          <View style={customStyles.itemContainer}>
+            <Text style={customStyles.label}>Estado:</Text>
+            <View style={{...customStyles.inputContainer}}>
+              <DropDown
+                data={states}
+                onSelect={onStateSelect}
+                value={tour.state}
+                placeHolder='Estado'
+                editable={false}
+              />
+            </View>
           </View>
         </View>
 
-        <View style={customStyles.itemContainer}>
-          <Text style={customStyles.label}>Nro personas: </Text>
-          <View style={customStyles.inputContainer}>
-            <TextInput
-              style={{...customStyles.input, width: 50}}
-              placeholder="1"
-              keyboardType="numeric"
-              defaultValue={tour.nTravelers}
-              onChangeText={(text) => handleTourChange({name:'nTravelers', value: text})}
-            />
+        {/* --------- Section customer */}
+        <View style={customStyles.section}>
+          <Text style={customStyles.sectionTitle}>Dato de Cliente</Text>
+          <View style={{...customStyles.itemContainer}}>
+            <Text style={customStyles.label}>Nombre:</Text>
+            <View style={customStyles.inputContainer}>
+              <TextInput
+                style={customStyles.input}
+                placeholder='Nombre'
+                defaultValue={customer.name}
+                onChangeText={(text) => handleCustomerChange({name:'name', value: text})}
+              />
+            </View>
+          </View>
+
+          <View style={{...customStyles.itemContainer}}>
+            <Text style={customStyles.label}>Documento:</Text>
+            <View style={customStyles.inputContainer}>
+              <TextInput
+                style={customStyles.input}
+                placeholder='Documento'
+                defaultValue={customer.nDoc}
+                onChangeText={(text) => handleCustomerChange({name:'nDoc', value:text})}
+              />
+            </View>
+          </View>
+
+          <View style={{...customStyles.itemContainer}}>
+            <Text style={customStyles.label}>Telefono:</Text>
+            <View style={customStyles.inputContainer}>
+              <TextInput
+                style={customStyles.input}
+                placeholder='Movil'
+                defaultValue={customer.phone}
+                onChangeText={(text) => handleCustomerChange({name:'phone', value:text})}
+                keyboardType= 'phone-pad'
+              />
+            </View>
+          </View>
+
+          <View style={{...customStyles.itemContainer}}>
+            <Text style={customStyles.label}>Correro:</Text>
+            <View style={customStyles.inputContainer}>
+              <TextInput
+                style={customStyles.input}
+                placeholder='Email'
+                defaultValue={customer.email}
+                onChangeText={(text) => handleCustomerChange({name:'email', value:text})}
+                keyboardType= 'email-address'
+                caretHidden={false}
+              />
+            </View>
           </View>
         </View>
 
-        <View style={customStyles.itemContainer}>
-          <Text style={customStyles.label}>Fecha reserva: </Text>
-          <View style={customStyles.inputContainer}>
-            <DatePicker
-              name='bookingDate'
-              date={tour.bookingDate}
-              handleChange={handleTourChange}
-            />
+        {/* --------- Section customer*/}
+        <View style={customStyles.section}>
+          <View style={{...customStyles.itemContainer, justifyContent:'flex-end'}}>
+            <Pressable
+              onPress={saveBooking}
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed
+                  ? colores.acento2
+                  : colores.acento
+                },
+                customStyles.button
+              ]}
+            >
+              {({ pressed }) => (
+                <Text style={customStyles.buttonText}>Guardar</Text>
+              )}
+            </Pressable>
           </View>
         </View>
-
-        <View style={customStyles.itemContainer}>
-          <Text style={customStyles.label}>Fecha salida: </Text>
-          <View style={customStyles.inputContainer}>
-            <DatePicker
-              name='tourDate'
-              date={tour.tourDate}
-              handleChange={handleTourChange}
-            />
-          </View>
-        </View>
-
-        <View style={customStyles.itemContainer}>
-          <Text style={customStyles.label}>Estado:</Text>
-          <View style={{...customStyles.inputContainer}}>
-            <DropDown
-              data={states}
-              onSelect={onStateSelect}
-              value={tour.state}
-              placeHolder='Estado'
-              editable={false}
-            />
-          </View>
-        </View>
-      </View>
-
-      {/* --------- Section customer */}
-      <View style={customStyles.section}>
-        <Text style={customStyles.sectionTitle}>Dato de Cliente</Text>
-        <View style={{...customStyles.itemContainer}}>
-          <Text style={customStyles.label}>Nombre:</Text>
-          <View style={customStyles.inputContainer}>
-            <TextInput
-              style={customStyles.input}
-              placeholder='Nombre'
-              defaultValue={customer.name}
-              onChangeText={(text) => handleCustomerChange({name:'name', value: text})}
-            />
-          </View>
-        </View>
-
-        <View style={{...customStyles.itemContainer}}>
-          <Text style={customStyles.label}>Documento:</Text>
-          <View style={customStyles.inputContainer}>
-            <TextInput
-              style={customStyles.input}
-              placeholder='Documento'
-              defaultValue={customer.nDoc}
-              onChangeText={(text) => handleCustomerChange({name:'nDoc', value:text})}
-            />
-          </View>
-        </View>
-
-        <View style={{...customStyles.itemContainer}}>
-          <Text style={customStyles.label}>Telefono:</Text>
-          <View style={customStyles.inputContainer}>
-            <TextInput
-              style={customStyles.input}
-              placeholder='Movil'
-              defaultValue={customer.phone}
-              onChangeText={(text) => handleCustomerChange({name:'phone', value:text})}
-              keyboardType= 'phone-pad'
-            />
-          </View>
-        </View>
-
-        <View style={{...customStyles.itemContainer}}>
-          <Text style={customStyles.label}>Correro:</Text>
-          <View style={customStyles.inputContainer}>
-            <TextInput
-              style={customStyles.input}
-              placeholder='Email'
-              defaultValue={customer.email}
-              onChangeText={(text) => handleCustomerChange({name:'email', value:text})}
-              keyboardType= 'email-address'
-              caretHidden={false}
-            />
-          </View>
-        </View>
-      </View>
-
-      {/* --------- Section customer*/}
-      <View style={customStyles.section}>
-        <View style={{...customStyles.itemContainer, justifyContent:'flex-end'}}>
-          <Pressable
-            onPress={saveBooking}
-            style={({ pressed }) => [
-              {
-                backgroundColor: pressed
-                ? colores.acento2
-                : colores.acento
-              },
-              customStyles.button
-            ]}
-          >
-            {({ pressed }) => (
-              <Text style={customStyles.buttonText}>Guardar</Text>
-            )}
-          </Pressable>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   )
 }
