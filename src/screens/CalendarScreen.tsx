@@ -20,8 +20,11 @@ const CalendarScreen = ({navigation}: Props) => {
   
   const { dateState, setDate } = useContext(DateContext)
 
-  const navigateTo = (id: string) => {
+  const navigateToBooking = (id: string) => {
     navigation.navigate('Booking', {id: id})
+  }
+  const navigateAddToBooking = () => {
+    navigation.navigate('AddBooking')
   }
 
   const onChange = (event: object, selectedDate: any) => {
@@ -66,8 +69,8 @@ const CalendarScreen = ({navigation}: Props) => {
         </View>
       </Header>
       
-      <BookingsList navigateTo={navigateTo}/>
-      <FloatingButton />
+      <BookingsList navigateTo={navigateToBooking}/>
+      <FloatingButton navigateTo={navigateAddToBooking}/>
     </View>
   )
 }
