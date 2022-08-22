@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { format } from 'date-fns'
-import { ScrollView, StyleSheet, Text, View } from "react-native"
+import { FlatList, StyleSheet, Text, View } from "react-native"
 import { DateContext } from "../context/DateContext"
 import { BookingItem } from "./BookingItem"
 import { getBookinsByStateDate } from "../helpers/getBookingsByState"
@@ -46,27 +46,23 @@ export const BookingsList = ({navigateTo}: Props) => {
 
   return (
     <View style={customStyles.container}>
-      <ScrollView>
-        {
-          grouped.map(
-            ({date, bookings}: groupedInterface, index) => {
-              return (
-                <View key={date}>
-                  <Text style={{
-                    ...styles.subtitle,
-                    marginTop: index === 0 ? 0: 25,
-                  }}>
-                    {date}
-                  </Text>
-                  {bookings.map(
-                    (booking) => <BookingItem key={booking.id} {...booking} navigateTo={navigateTo}/>
-                  )}
-                </View>
-              )
-            }
-          )
-        }
-      </ScrollView>
+      <FlatList
+        data={grouped}
+        keyExtractor={item => item.date}
+        renderItem={({item}) => (
+          <View>
+            <Text style={{
+              ...styles.subtitle,
+              marginBottom: 25,
+            }}>
+              {item.date}
+            </Text>
+            {item.bookings.map(
+              (booking) => <BookingItem key={booking.id} {...booking} navigateTo={navigateTo}/>
+            )}
+          </View>
+        )}
+      />
     </View>
   )
 }
