@@ -1,10 +1,10 @@
 import { Pressable, StyleSheet, View } from "react-native"
-import Icon from '@expo/vector-icons/Ionicons';
+import { Ionicons as Icon} from '@expo/vector-icons';
 import { colores } from "../theme/appTheme";
 
 interface Props {
   navigateTo: () => void,
-  iconName: string
+  iconName: keyof typeof Icon.glyphMap
 }
 
 export const FloatingButton = ({navigateTo, iconName}: Props) => {
