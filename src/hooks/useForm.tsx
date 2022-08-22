@@ -7,6 +7,7 @@ interface Target{
 
 export const useForm = (initialState: any) => {
   const [values, setValues] = useState(initialState)
+  const [initialValues, setInitialValues] = useState(initialState)
 
   const handleInputChage = (target: Target) => {
     setValues({
@@ -15,5 +16,9 @@ export const useForm = (initialState: any) => {
     })
   }
 
-  return[values, handleInputChage]
+  const toInitialState = () => {
+    setValues(initialValues)
+  }
+
+  return[values, handleInputChage, toInitialState]
 }
