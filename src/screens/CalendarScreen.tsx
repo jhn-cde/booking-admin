@@ -60,11 +60,9 @@ const CalendarScreen = ({navigation}: Props) => {
 
 export const CalendarScreenState = ({route, navigation}: Props) => {
   return (
-    <TextProvider>
-      <DateProvider>
-        <CalendarScreen route={route} navigation={navigation}/>
-      </DateProvider>
-    </TextProvider>
+    <DateProvider>
+      <CalendarScreen route={route} navigation={navigation}/>
+    </DateProvider>
   )
 }
 
