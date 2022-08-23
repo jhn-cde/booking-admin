@@ -2,14 +2,14 @@ import { useContext } from "react";
 import { BookingsContext } from "../context/BookingsContext";
 import { customerInterface } from "../data/bookings";
 
-interface toursInterface{
+export interface tourInterface{
   id: string,
   name: string,
   state: string
 }
 
 export interface customerDataInterface extends customerInterface{
-  tours: toursInterface[]
+  tours: tourInterface[]
 }
 
 export const getCustomers = (text: string) => {
