@@ -4,6 +4,7 @@ import { BookingsState } from "./BookingsContext";
 type DateAction =
   | {type: 'addBooking', payload: bookingInterface}
   | {type: 'removeBooking', payload: string}
+  | {type: 'editBooking', payload: bookingInterface}
 
 export const bookingsReducer = (state: BookingsState, action: DateAction): BookingsState => {
   switch (action.type) {
@@ -14,6 +15,15 @@ export const bookingsReducer = (state: BookingsState, action: DateAction): Booki
           ...state.bookings, 
           action.payload
         ]
+      }
+    case 'editBooking':
+      return{
+        ...state,
+        bookings: state.bookings.map(item => {
+          if (item.id === action.payload.id)
+            return action.payload
+          return item
+        })
       }
     case 'removeBooking':
       return {

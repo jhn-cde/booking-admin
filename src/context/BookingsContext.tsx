@@ -16,7 +16,8 @@ export const bookingsInitialState: BookingsState = {
 export interface BookingsContextProps{
   bookingsState: BookingsState,
   addBooking: (pbooking: bookingInterface) => void,
-  removeBooking: (bookingId: string) => void
+  removeBooking: (bookingId: string) => void,
+  editBooking: (pbooking: bookingInterface) => void
 }
 
 // contexto
@@ -32,12 +33,16 @@ export const BookingsProvider = ({children}: any) => {
   const removeBooking = (bookingId: string) => {
     dispatch({type: 'removeBooking', payload: bookingId})
   }
+  const editBooking = (pBooking: bookingInterface) => {
+    dispatch({type: 'editBooking', payload: pBooking})
+  }
 
   return(
     <BookingsContext.Provider value={{
       bookingsState,
       addBooking,
-      removeBooking
+      editBooking,
+      removeBooking,
     }}
     >
       {children}
