@@ -1,12 +1,15 @@
-import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, View } from "react-native";
 
 import { DropDown } from "../components/DropDown";
-import { bookingInterface, customerInterface } from "../data/bookings";
+import { bookingInterface } from "../data/bookings";
 import { colores, styles } from "../theme/appTheme";
 import { useForm } from "../hooks/useForm";
 import { DatePicker } from "../components/DatePicker";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { BookingsContext } from "../context/BookingsContext";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParams } from "../navigator/StackNavigator";
+import { getBookingById } from "../helpers/getBookingById";
 
 const tours = [
   'Manu',
@@ -20,63 +23,51 @@ const states = [
   'Cancelado',
 ]
 
-export const AddBookingScreen = (booking?: bookingInterface) => {
-  const [tour, handleTourChange, tourInitialState] = useForm({
-    id: 'id',
-    tour: tours[0],
-    nTravelers: 1,
-    bookingDate: new Date(),
-    tourDate: new Date(),
-    state: states[0]
-  })
-  const [customer, handleCustomerChange, customerInitialState] = useForm({
-    nDoc: '',
-    name: '',
-    phone: '',
-    email: ''
-  })
+interface Props extends NativeStackScreenProps<RootStackParams, 'AddBooking'>{}
 
-  const { bookingsState, addBooking } = useContext(BookingsContext)
+export const AddBookingScreen = ({route, navigation}: Props) => {
+  const { bookingsState, addBooking, editBooking } = useContext(BookingsContext)
+  const booking = getBookingById(route.params?.id)
+  
+  let edit = booking.id!=''
 
-  const onTourSelect = (val: string) => {
-    handleTourChange({name: 'tour', value: val})
-  }
-
-  const onStateSelect = (val: string) => {
-    handleTourChange({name: 'state', value: val})
-  }
-
-  const changeBookingDate = (newDate: Date | undefined) => {
-    handleTourChange({name: 'bookingDate', value: newDate});
-  }
-
-  const changeTourDate = (newDate: Date | undefined) => {
-    handleTourChange({name: 'tourDate', value: newDate});
-  }
+  const [data, handleDataChange, setData] = useForm(booking)
 
   const saveBooking = () => {
     let newBooking: bookingInterface
-    let customerData: customerInterface = customer
+
     newBooking = {
-      id: ''+tour.tourDate.getDate()+bookingsState.bookings.length+tour.tour.split(' ')[0],
-      tour: tour.tour,
-      nTravelers: tour.nTravelers,
-      tourDate: tour.tourDate.toLocaleDateString(),
-      bookingDate: tour.bookingDate.toLocaleDateString(),
-      state: tour.state,
-      customer: customerData
+      id: edit?data.id:
+        ''+
+          data.tourDate.getDate()+
+          bookingsState.bookings.length+
+          data.tour.split(' ')[0],
+      tour: data.tour,
+      nTravelers: data.nTravelers,
+      tourDate: data.tourDate.toLocaleDateString(),
+      bookingDate: data.bookingDate.toLocaleDateString(),
+      state: data.state,
+      customer: {
+        nDoc: data.nDoc,
+        name: data.name,
+        phone: data.phone,
+        email: data.email
+      }
     }
-    addBooking(newBooking)
+    
+    edit
+      ?editBooking(newBooking)
+      :addBooking(newBooking)
     
     // Mensaje de booking guardado correctamente
     ToastAndroid.show(
       newBooking.tour+'-'+newBooking.customer.name+', se guardó correctamente con id: '+newBooking.id,
       ToastAndroid.LONG
     )
-    // reestablecer tour values
-    tourInitialState()
     //reestablecer customer values
-    customerInitialState()
+    edit
+      ?navigation.pop()
+      :setData(booking)
   }
 
   return(
@@ -94,8 +85,8 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
             <View style={{...customStyles.inputContainer}}>
               <DropDown
                 data={tours}
-                onSelect={onTourSelect}
-                value={tour.tour}
+                onSelect={(text) => handleDataChange({name: 'tour', value: text})}
+                value={data.tour}
                 placeHolder='Nombre de tour'
                 editable={true}
               />
@@ -109,8 +100,8 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
                 style={{...customStyles.input, width: 50}}
                 placeholder="1"
                 keyboardType="numeric"
-                defaultValue={tour.nTravelers}
-                onChangeText={(text) => handleTourChange({name:'nTravelers', value: text})}
+                defaultValue={data.nTravelers}
+                onChangeText={(text) => handleDataChange({name:'nTravelers', value: text})}
               />
             </View>
           </View>
@@ -119,8 +110,8 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
             <Text style={customStyles.label}>Fecha reserva: </Text>
             <View style={customStyles.inputContainer}>
               <DatePicker
-                date={tour.bookingDate}
-                changeDate={changeBookingDate}
+                date={data.bookingDate}
+                changeDate={(newDate) => handleDataChange({name: 'bookingDate', value: newDate})}
               />
             </View>
           </View>
@@ -129,8 +120,8 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
             <Text style={customStyles.label}>Fecha salida: </Text>
             <View style={customStyles.inputContainer}>
               <DatePicker
-                date={tour.tourDate}
-                changeDate={changeTourDate}
+                date={data.tourDate}
+                changeDate={(newDate) => handleDataChange({name: 'tourDate', value: newDate})}
               />
             </View>
           </View>
@@ -140,8 +131,8 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
             <View style={{...customStyles.inputContainer}}>
               <DropDown
                 data={states}
-                onSelect={onStateSelect}
-                value={tour.state}
+                onSelect={(text) => handleDataChange({name: 'state', value: text})}
+                value={data.state}
                 placeHolder='Estado'
                 editable={false}
               />
@@ -158,8 +149,8 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
               <TextInput
                 style={customStyles.input}
                 placeholder='Nombre'
-                defaultValue={customer.name}
-                onChangeText={(text) => handleCustomerChange({name:'name', value: text})}
+                defaultValue={data.name}
+                onChangeText={(text) => handleDataChange({name:'name', value: text})}
               />
             </View>
           </View>
@@ -170,8 +161,8 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
               <TextInput
                 style={customStyles.input}
                 placeholder='Documento'
-                defaultValue={customer.nDoc}
-                onChangeText={(text) => handleCustomerChange({name:'nDoc', value:text})}
+                defaultValue={data.nDoc}
+                onChangeText={(text) => handleDataChange({name:'nDoc', value:text})}
               />
             </View>
           </View>
@@ -182,8 +173,8 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
               <TextInput
                 style={customStyles.input}
                 placeholder='Movil'
-                defaultValue={customer.phone}
-                onChangeText={(text) => handleCustomerChange({name:'phone', value:text})}
+                defaultValue={data.phone}
+                onChangeText={(text) => handleDataChange({name:'phone', value:text})}
                 keyboardType= 'phone-pad'
               />
             </View>
@@ -195,8 +186,8 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
               <TextInput
                 style={customStyles.input}
                 placeholder='Email'
-                defaultValue={customer.email}
-                onChangeText={(text) => handleCustomerChange({name:'email', value:text})}
+                defaultValue={data.email}
+                onChangeText={(text) => handleDataChange({name:'email', value:text})}
               />
             </View>
           </View>
