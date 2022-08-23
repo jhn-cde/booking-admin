@@ -1,7 +1,7 @@
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, View } from "react-native";
 
 import { DropDown } from "../components/DropDown";
-import { bookingInterface } from "../data/bookings";
+import { bookingInterface, states, tours } from "../data/bookings";
 import { colores, styles } from "../theme/appTheme";
 import { useForm } from "../hooks/useForm";
 import { DatePicker } from "../components/DatePicker";
@@ -10,18 +10,6 @@ import { BookingsContext } from "../context/BookingsContext";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParams } from "../navigator/StackNavigator";
 import { getBookingById } from "../helpers/getBookingById";
-
-const tours = [
-  'Manu',
-  'Tambopata',
-  'Machupicchu',
-  'Cusco',
-]
-const states = [
-  'Pendiente',
-  'Finalizado',
-  'Cancelado',
-]
 
 interface Props extends NativeStackScreenProps<RootStackParams, 'AddBooking'>{}
 
@@ -76,6 +64,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
     >
       <ScrollView
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps = 'always'
       >
         {/* --------- Section Tour */}
         <View style={customStyles.section}>
@@ -130,7 +119,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
             <Text style={customStyles.label}>Estado:</Text>
             <View style={{...customStyles.inputContainer}}>
               <DropDown
-                data={states}
+                data={states.map(state => state.name)}
                 onSelect={(text) => handleDataChange({name: 'state', value: text})}
                 value={data.state}
                 placeHolder='Estado'
@@ -194,7 +183,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
         </View>
 
         {/* --------- Section customer*/}
-        <View style={customStyles.section}>
+        <View style={{...customStyles.section, marginBottom:0}}>
           <View style={{...customStyles.itemContainer, justifyContent:'flex-end'}}>
             <Pressable
               onPress={saveBooking}
