@@ -4,7 +4,7 @@ import { BookingsContext } from "../context/BookingsContext";
 export interface bookingInterfaceId{
   id: string,
   tour: string,
-  nTravelers: number,
+  nTravelers: string,
   bookingDate: Date,
   tourDate: Date,
   state: string,
@@ -17,7 +17,7 @@ export interface bookingInterfaceId{
 const defaultBooking: bookingInterfaceId = {
   id: '',
   tour: 'Manu',
-  nTravelers: 1,
+  nTravelers: '2',
   bookingDate: new Date(),
   tourDate: new Date(),
   state: 'Pendiente',
