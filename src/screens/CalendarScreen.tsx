@@ -2,9 +2,6 @@ import { useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import Icon from '@expo/vector-icons/Ionicons';
-import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
-import { format } from 'date-fns'
 
 //componentes
 import { colores, styles } from "../theme/appTheme"
@@ -30,7 +27,6 @@ const CalendarScreen = ({navigation}: Props) => {
   const onDateChange = (newDate: Date | undefined) => {
     newDate && setDate(newDate);
   }
-
 
   const {top: paddingTop} = useSafeAreaInsets()
   return (
