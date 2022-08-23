@@ -57,7 +57,7 @@ export const bookings = [
       nDoc: '1235',
       name: 'Elizabeth',
       phone: '+19999192',
-      email: 'willam@gmail.com',
+      email: 'eliswann@gmail.com',
     },
     state: 'Finalizado'
   },
@@ -69,9 +69,9 @@ export const bookings = [
     tourDate: '2022/09/21',
     customer: {
       nDoc: '1236',
-      name: 'Albus',
+      name: 'Popertina',
       phone: '+19999192',
-      email: 'willam@gmail.com',
+      email: 'goldtina@gmail.com',
     },
     state: 'Pendiente'
   },
@@ -85,7 +85,7 @@ export const bookings = [
       nDoc: '1237',
       name: 'Grind',
       phone: '+19999192',
-      email: 'willam@gmail.com',
+      email: 'gellert@gmail.com',
     },
     state: 'Pendiente'
   },
@@ -99,7 +99,7 @@ export const bookings = [
       nDoc: '1238',
       name: 'Newt',
       phone: '+19999192',
-      email: 'newt@gmail.com',
+      email: 'newtsc@gmail.com',
     },
     state: 'Pendiente'
   },
@@ -111,9 +111,9 @@ export const bookings = [
     tourDate: '2022/09/15',
     customer: {
       nDoc: '1239',
-      name: 'Frodo',
+      name: 'Roberto',
       phone: '+19999192',
-      email: 'bolson@gmail.com',
+      email: 'rgrint@gmail.com',
     },
     state: 'Pendiente'
   },
@@ -125,53 +125,53 @@ export const bookings = [
     tourDate: '2022/09/15',
     customer: {
       nDoc: '1240',
-      name: 'Smeagol',
+      name: 'Emma',
       phone: '+19999192',
-      email: 'miprecioso@gmail.com',
+      email: 'emmawat@gmail.com',
     },
     state: 'Pendiente'
   },
   {
     id: '8',
     tour: 'Machupicchu',
-    nTravelers: '3',
+    nTravelers: '2',
     bookingDate: '2022/06/20',
     tourDate: '2022/09/20',
     customer: {
-      nDoc: '1241',
-      name: 'Aragorn',
+      nDoc: '1235',
+      name: 'Elizabeth',
       phone: '+19999192',
-      email: 'araghunters@gmail.com',
+      email: 'eliswann@gmail.com',
     },
-    state: 'Pendiente'
+    state: 'Cancelado'
   },
   {
     id: '9',
     tour: 'Cusco',
-    nTravelers: '1',
+    nTravelers: '2',
     bookingDate: '2022/05/20',
     tourDate: '2022/09/10',
     customer: {
-      nDoc: '1242',
-      name: 'Avicii',
+      nDoc: '1235',
+      name: 'Elizabeth',
       phone: '+19999192',
-      email: 'avicii@gmail.com',
+      email: 'eliswann@gmail.com',
     },
     state: 'Pendiente'
   },
   {
     id: '10',
-    tour: 'Cusco',
-    nTravelers: '1',
+    tour: 'Machupicchu',
+    nTravelers: '2',
     bookingDate: '2022/05/21',
     tourDate: '2022/09/11',
     customer: {
-      nDoc: '1243',
-      name: 'Mike',
+      nDoc: '1235',
+      name: 'Elizabeth',
       phone: '+19999192',
-      email: 'posner@gmail.com',
+      email: 'eliswann@gmail.com',
     },
-    state: 'Cancelado'
+    state: 'Pendiente'
   },
   {
     id: '11',
@@ -189,15 +189,15 @@ export const bookings = [
   },
   {
     id: '12',
-    tour: 'Machupicchu',
-    nTravelers: '4',
+    tour: 'Humantay',
+    nTravelers: '2',
     bookingDate: '2022/07/10',
     tourDate: '2022/10/12',
     customer: {
-      nDoc: '1245',
-      name: 'Sonny',
+      nDoc: '1240',
+      name: 'Emma',
       phone: '+19999192',
-      email: 'skrillex@gmail.com',
+      email: 'emmawat@gmail.com',
     },
     state: 'Pendiente'
   },
@@ -217,7 +217,7 @@ export const bookings = [
   },
   {
     id: '14',
-    tour: 'Machupicchu',
+    tour: 'Manu',
     nTravelers: '1',
     bookingDate: '2022/06/28',
     tourDate: '2022/11/01',
