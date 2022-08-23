@@ -4,7 +4,7 @@ import Icon from '@expo/vector-icons/Ionicons';
 import { useContext, useEffect } from "react"
 import { format } from 'date-fns'
 
-import { getBookingById } from "../helpers/getBookingById"
+import { bookingInterfaceId, getBookingById } from "../helpers/getBookingById"
 import { RootStackParams } from "../navigator/StackNavigator"
 import { colores, styles } from "../theme/appTheme"
 import { FloatingButton } from "../components/FloatingButton";
@@ -15,11 +15,11 @@ interface Props extends NativeStackScreenProps<RootStackParams, 'Booking'>{}
 export const BookingScreen = ({route, navigation}: Props) => {
   const { removeBooking } = useContext(BookingsContext)
 
-  let booking = getBookingById(route.params.id) 
+  const booking:bookingInterfaceId = getBookingById(route.params.id)
 
   useEffect(() => { 
     navigation.setOptions({
-      title: 'Booking - Id ' + booking?.id,
+      title: 'Booking - Id ' + booking.id,
       headerTitleStyle:{
         ...styles.title,
         color: colores.secondary
@@ -27,6 +27,10 @@ export const BookingScreen = ({route, navigation}: Props) => {
       headerShadowVisible: false,
     });
   }, [navigation])
+
+  const editarBooking = () => {
+    navigation.navigate('AddBooking', {id: route.params.id})
+  }
 
   const eliminarBooking = () => {
     Alert.alert(
@@ -86,8 +90,14 @@ export const BookingScreen = ({route, navigation}: Props) => {
             </Text>
 
             <Text style={customStyles.subsection}>
-              <Text style={customStyles.cat}>Booking ID: </Text>
-              <Text style={customStyles.value}>{booking?.id}</Text>        
+              <Text style={customStyles.cat}>Estado: </Text>
+              <Text style={{
+                ...customStyles.value,
+                color: booking?.state==='Pendiente'?'#5cb85c':colores.text,
+                fontWeight: booking?.state==='Pendiente'?'600':'500'
+              }}>
+                {booking?.state}
+              </Text>        
             </Text>
 
             <Text style={customStyles.subsection}>
@@ -117,28 +127,28 @@ export const BookingScreen = ({route, navigation}: Props) => {
 
             <Text style={customStyles.subsection}>
               <Text style={customStyles.cat}>Nombre: </Text>
-              <Text style={{...customStyles.value, ...customStyles.important}}>{booking?.customer.name}</Text>        
+              <Text style={{...customStyles.value, ...customStyles.important}}>{booking.name}</Text>        
             </Text>
 
             <Text style={customStyles.subsection}>
               <Text style={customStyles.cat}>Documento: </Text>
-              <Text style={customStyles.value}>{booking?.customer.nDoc}</Text>        
+              <Text style={customStyles.value}>{booking.nDoc}</Text>        
             </Text>
 
             <Text style={customStyles.subsection}>
               <Text style={customStyles.cat}>Telefono: </Text>
-              <Text style={customStyles.value}>{booking?.customer.phone}</Text>        
+              <Text style={customStyles.value}>{booking.phone}</Text>        
             </Text>
 
             <Text style={customStyles.subsection}>
               <Text style={customStyles.cat}>Email: </Text>
-              <Text style={customStyles.value}>{booking?.customer.email}</Text>        
+              <Text style={customStyles.value}>{booking.email}</Text>
             </Text>
           </View>
         </View>
       </View>
       <FloatingButton
-        navigateTo={() => {}}
+        navigateTo={editarBooking}
         iconName='build-outline'
       />
     </View>
