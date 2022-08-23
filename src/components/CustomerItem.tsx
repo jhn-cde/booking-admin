@@ -3,6 +3,7 @@ import Icon from '@expo/vector-icons/Ionicons';
 
 import { customerDataInterface } from "../helpers/getCustomers"
 import { colores, styles } from "../theme/appTheme"
+import { ToursScrollView } from "./ToursScrollView";
 
 interface itemInterface extends customerDataInterface{
   navigateTo: (id:string) => void
@@ -24,23 +25,10 @@ export const CustomerItem = ({name, nDoc, phone, email, tours, navigateTo}: item
         <Icon name="mail-outline"/> {email}
       </Text>
       <View style={{...customStyles.content, marginTop: 10,}}>
-        <View style={{maxWidth: '60%'}}>
-          <Text style={styles.text}>Tours pendientes</Text>
-          <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
-            {tours.filter(tour => tour.state==='Pendiente').map(tour => {
-              return (
-              <View key={tour.id} style={{marginRight: 10}}>
-                <TouchableOpacity
-                  onPress={() => navigate(tour.id)}
-                >
-                  <Text style={customStyles.tourText}>
-                    {tour.name}
-                  </Text>
-                </TouchableOpacity>
-              </View>)
-            })}
-          </ScrollView>
-        </View>
+        <ToursScrollView
+          tours={tours}
+          navigate={navigate} 
+        />
         <View style={{marginRight: 5}}>
           <Text style={styles.text}>Total</Text>
           <Text style={{...styles.text, textAlign: 'right'}}>{tours.length}</Text>
@@ -66,11 +54,5 @@ const customStyles = StyleSheet.create({
     flexDirection: 'row',
     fill: 1,
     justifyContent: 'space-between'
-  },
-  tourText:{
-    ...styles.text,
-    color: colores.acento,
-    fontSize: 14,
-    fontWeight: '600'
   },
 })
