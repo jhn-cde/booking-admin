@@ -9,6 +9,7 @@ import { RootStackParams } from "../navigator/StackNavigator"
 import { colores, styles } from "../theme/appTheme"
 import { FloatingButton } from "../components/FloatingButton";
 import { BookingsContext } from "../context/BookingsContext";
+import { states } from "../data/bookings";
 
 interface Props extends NativeStackScreenProps<RootStackParams, 'Booking'>{}
 
@@ -35,9 +36,9 @@ export const BookingScreen = ({route, navigation}: Props) => {
   const eliminarBooking = () => {
     Alert.alert(
       'Eliminar booking',
-      'En verdad quiere eliminar el booking con id: '+route.params.id,
+      'Esta seguro de eliminar el booking '+booking.name+'-'+booking.tour+' con id: '+route.params.id+'?',
       [
-        { text:'Ok', style:'cancel', onPress:() => {
+        { text:'eliminar', style:'cancel', onPress:() => {
           removeBooking(route.params.id)
           
           ToastAndroid.show(
@@ -47,7 +48,7 @@ export const BookingScreen = ({route, navigation}: Props) => {
 
           navigation.pop();
         }},
-        {text:'cancel', style:'cancel'}
+        {text:'cancelar', style:'cancel'}
       ],
       { cancelable: true }
     )
@@ -93,7 +94,7 @@ export const BookingScreen = ({route, navigation}: Props) => {
               <Text style={customStyles.cat}>Estado: </Text>
               <Text style={{
                 ...customStyles.value,
-                color: booking?.state==='Pendiente'?'#5cb85c':colores.text,
+                color: booking?.state?states.filter(item => item.name===booking.state)[0].color:colores.text,
                 fontWeight: booking?.state==='Pendiente'?'600':'500'
               }}>
                 {booking?.state}
