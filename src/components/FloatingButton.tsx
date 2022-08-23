@@ -21,7 +21,7 @@ export const FloatingButton = ({navigateTo, iconName}: Props) => {
           style={({ pressed }) => [
             {
               backgroundColor: pressed
-              ? colores.acento2
+              ? colores.acentoPress
               : colores.acento
             },
             styles.boton
