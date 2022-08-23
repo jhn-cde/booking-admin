@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { StyleSheet, Text, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -11,6 +11,7 @@ import { Header } from "../components/Header"
 import { DateContext, DateProvider } from "../context/DateContext";
 import { RootStackParams } from "../navigator/StackNavigator";
 import { DatePicker } from "../components/DatePicker";
+import { TextProvider } from "../context/TextContext";
 
 type Props = NativeStackScreenProps<RootStackParams, 'Tabs'>;
 
@@ -59,9 +60,11 @@ const CalendarScreen = ({navigation}: Props) => {
 
 export const CalendarScreenState = ({route, navigation}: Props) => {
   return (
-    <DateProvider>
-      <CalendarScreen route={route} navigation={navigation}/>
-    </DateProvider>
+    <TextProvider>
+      <DateProvider>
+        <CalendarScreen route={route} navigation={navigation}/>
+      </DateProvider>
+    </TextProvider>
   )
 }
 
