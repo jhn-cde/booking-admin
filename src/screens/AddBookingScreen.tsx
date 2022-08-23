@@ -210,7 +210,7 @@ export const AddBookingScreen = (booking?: bookingInterface) => {
               style={({ pressed }) => [
                 {
                   backgroundColor: pressed
-                  ? colores.acento2
+                  ? colores.acentoPress
                   : colores.acento
                 },
                 customStyles.button
