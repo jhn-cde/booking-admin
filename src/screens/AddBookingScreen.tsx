@@ -14,7 +14,7 @@ import { getBookingById } from "../helpers/getBookingById";
 interface Props extends NativeStackScreenProps<RootStackParams, 'AddBooking'>{}
 
 export const AddBookingScreen = ({route, navigation}: Props) => {
-  const { bookingsState, addBooking, editBooking } = useContext(BookingsContext)
+  const { bookingsState, addBooking, editBooking, addTour } = useContext(BookingsContext)
   const booking = getBookingById(route.params?.id)
   
   let edit = booking.id!=''
@@ -46,12 +46,18 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
     edit
       ?editBooking(newBooking)
       :addBooking(newBooking)
-    
+
+    // verificar si se agrego nuevo tour esta de booking
+    const tmpExiste = bookingsState.tours.find(tour => tour.name.toLowerCase() === data.tour.toLowerCase())
+    // si no existe agregar
+    !!!tmpExiste && addTour(data.tour)
+
     // Mensaje de booking guardado correctamente
     ToastAndroid.show(
       newBooking.tour+'-'+newBooking.customer.name+', se guardó correctamente con id: '+newBooking.id,
       ToastAndroid.LONG
     )
+
     //reestablecer customer values
     edit
       ?navigation.pop()
@@ -74,7 +80,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
             <View style={{...customStyles.inputContainer}}>
               <DropDown
                 data={bookingsState.tours.map(tour => tour.name)}
-                onSelect={(text) => handleDataChange({name: 'tour', value: text})}
+                onSelect={(text) => handleDataChange({name: 'tour', value: text.trim()})}
                 value={data.tour}
                 placeHolder='Nombre de tour'
                 editable={true}
@@ -90,7 +96,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
                 placeholder="1"
                 keyboardType="numeric"
                 defaultValue={data.nTravelers}
-                onChangeText={(text) => handleDataChange({name:'nTravelers', value: text})}
+                onChangeText={(text) => handleDataChange({name:'nTravelers', value: text.trim()})}
               />
             </View>
           </View>
@@ -120,7 +126,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
             <View style={{...customStyles.inputContainer}}>
               <DropDown
                 data={bookingsState.states.map(state => state.name)}
-                onSelect={(text) => handleDataChange({name: 'state', value: text})}
+                onSelect={(text) => handleDataChange({name: 'state', value: text.trim()})}
                 value={data.state}
                 placeHolder='Estado'
                 editable={false}
@@ -139,7 +145,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
                 style={customStyles.input}
                 placeholder='Nombre'
                 defaultValue={data.name}
-                onChangeText={(text) => handleDataChange({name:'name', value: text})}
+                onChangeText={(text) => handleDataChange({name:'name', value: text.trim()})}
               />
             </View>
           </View>
@@ -151,7 +157,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
                 style={customStyles.input}
                 placeholder='Documento'
                 defaultValue={data.nDoc}
-                onChangeText={(text) => handleDataChange({name:'nDoc', value:text})}
+                onChangeText={(text) => handleDataChange({name:'nDoc', value:text.trim()})}
               />
             </View>
           </View>
@@ -163,7 +169,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
                 style={customStyles.input}
                 placeholder='Movil'
                 defaultValue={data.phone}
-                onChangeText={(text) => handleDataChange({name:'phone', value:text})}
+                onChangeText={(text) => handleDataChange({name:'phone', value:text.trim()})}
                 keyboardType= 'phone-pad'
               />
             </View>
@@ -176,7 +182,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
                 style={customStyles.input}
                 placeholder='Email'
                 defaultValue={data.email}
-                onChangeText={(text) => handleDataChange({name:'email', value:text})}
+                onChangeText={(text) => handleDataChange({name:'email', value:text.trim()})}
               />
             </View>
           </View>
