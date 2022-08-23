@@ -7,7 +7,7 @@ import { colores, styles } from '../theme/appTheme';
 export type RootStackParams = {
   Tabs: undefined,
   Booking: { id: string },
-  AddBooking: undefined
+  AddBooking: {id: string} | undefined
 }
 
 const Stack = createNativeStackNavigator();
