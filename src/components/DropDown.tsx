@@ -32,8 +32,9 @@ export const DropDown = ({data, value, onSelect, placeHolder, editable}: Props) 
               placeholder={placeHolder}
               defaultValue={value}
               onFocus={() => setShownOption(true)}
-              onSubmitEditing={() => setShownOption(false)}
-              onChangeText={(text) => {setShownOption(true);onSelect(text)}}
+              onSubmitEditing={() => {setShownOption(false)}}
+              blurOnSubmit={true}
+              onChangeText={(text) => {setShownOption(true); onSelect(text)}}
             />
           </View>
         : <TouchableOpacity
@@ -47,7 +48,6 @@ export const DropDown = ({data, value, onSelect, placeHolder, editable}: Props) 
       <View style={customStyles.optionsContainer}>
         {shownOption && <View style={customStyles.optionsBox}>
           <ScrollView
-            keyboardShouldPersistTaps = 'handled'
             showsVerticalScrollIndicator={false}
           >
             {(editable?data.filter(item => item.toLocaleLowerCase().includes(value.toLocaleLowerCase())):data).map((val) => {
