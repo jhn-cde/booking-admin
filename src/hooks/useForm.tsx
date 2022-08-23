@@ -20,5 +20,9 @@ export const useForm = (initialState: any) => {
     setValues(initialValues)
   }
 
-  return[values, handleInputChage, toInitialState]
+  const setState = (target: any) => {
+    setValues(target)
+  }
+
+  return[values, handleInputChage, toInitialState, setState]
 }
