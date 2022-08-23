@@ -14,6 +14,9 @@ export interface bookingInterface{
   state: string
 }
 
+export const states = [{name:'Pendiente', color:'#feb500'}, {name: 'Finalizado',color:'#198754'}, {name:'Cancelado', color:'#8B008B'}]
+export const tours = ['Manu', 'Tambopata', 'Machupicchu', 'Humantay', 'Cusco']
+
 export const bookings = [
   {
     id: '1',
