@@ -25,8 +25,7 @@ export const SearchBar = () => {
 const customStyles = StyleSheet.create({
   container:{
     height: 50,
-    marginTop: 10,
-    marginBottom: 5
+    marginBottom: 10
   },
   input:{
     fontSize: 20,
