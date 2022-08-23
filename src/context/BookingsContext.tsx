@@ -1,15 +1,19 @@
 import { createContext, useReducer } from "react"
-import { bookingInterface, bookings } from "../data/bookings"
+import { bookingInterface, bookings, initialStates, initialTours, stateInterface, tourInterface } from "../data/bookings"
 import { bookingsReducer } from "./bookingsReducer"
 
 //Informacion que contiene
 export interface BookingsState {
-  bookings: bookingInterface[], 
+  bookings: bookingInterface[],
+  states: stateInterface[],
+  tours: tourInterface[]
 }
 
 //Estado inicial
 export const bookingsInitialState: BookingsState = {
   bookings: bookings,
+  states: initialStates,
+  tours: initialTours
 }
 
 // inteface de contexto
@@ -17,7 +21,8 @@ export interface BookingsContextProps{
   bookingsState: BookingsState,
   addBooking: (pbooking: bookingInterface) => void,
   removeBooking: (bookingId: string) => void,
-  editBooking: (pbooking: bookingInterface) => void
+  editBooking: (pbooking: bookingInterface) => void,
+  addTour: (ptour: string) => void,
 }
 
 // contexto
@@ -36,6 +41,9 @@ export const BookingsProvider = ({children}: any) => {
   const editBooking = (pBooking: bookingInterface) => {
     dispatch({type: 'editBooking', payload: pBooking})
   }
+  const addTour = (ptour: string) => {
+    dispatch({type: 'addTour', payload: ptour})
+  }
 
   return(
     <BookingsContext.Provider value={{
@@ -43,6 +51,7 @@ export const BookingsProvider = ({children}: any) => {
       addBooking,
       editBooking,
       removeBooking,
+      addTour
     }}
     >
       {children}

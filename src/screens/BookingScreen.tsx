@@ -9,12 +9,11 @@ import { RootStackParams } from "../navigator/StackNavigator"
 import { colores, styles } from "../theme/appTheme"
 import { FloatingButton } from "../components/FloatingButton";
 import { BookingsContext } from "../context/BookingsContext";
-import { states } from "../data/bookings";
 
 interface Props extends NativeStackScreenProps<RootStackParams, 'Booking'>{}
 
 export const BookingScreen = ({route, navigation}: Props) => {
-  const { removeBooking } = useContext(BookingsContext)
+  const { bookingsState, removeBooking } = useContext(BookingsContext)
 
   const booking:bookingInterfaceId = getBookingById(route.params.id)
 
@@ -94,7 +93,7 @@ export const BookingScreen = ({route, navigation}: Props) => {
               <Text style={customStyles.cat}>Estado: </Text>
               <Text style={{
                 ...customStyles.value,
-                color: booking?.state?states.filter(item => item.name===booking.state)[0].color:colores.text,
+                color: booking?.state?bookingsState.states.filter(item => item.name===booking.state)[0].color:colores.text,
                 fontWeight: booking?.state==='Pendiente'?'600':'500'
               }}>
                 {booking?.state}

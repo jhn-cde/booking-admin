@@ -5,6 +5,7 @@ type DateAction =
   | {type: 'addBooking', payload: bookingInterface}
   | {type: 'removeBooking', payload: string}
   | {type: 'editBooking', payload: bookingInterface}
+  | {type: 'addTour', payload: string}
 
 export const bookingsReducer = (state: BookingsState, action: DateAction): BookingsState => {
   switch (action.type) {
@@ -29,6 +30,14 @@ export const bookingsReducer = (state: BookingsState, action: DateAction): Booki
       return {
         ...state,
         bookings: state.bookings.filter(item => item.id != action.payload)
+      }
+    case 'addTour':
+      return {
+        ...state,
+        tours: [
+          ...state.tours,
+          {name: action.payload}
+        ]
       }
     default:
       return state

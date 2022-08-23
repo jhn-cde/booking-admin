@@ -1,11 +1,11 @@
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, View } from "react-native";
 
 import { DropDown } from "../components/DropDown";
-import { bookingInterface, states, tours } from "../data/bookings";
+import { bookingInterface } from "../data/bookings";
 import { colores, styles } from "../theme/appTheme";
 import { useForm } from "../hooks/useForm";
 import { DatePicker } from "../components/DatePicker";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { BookingsContext } from "../context/BookingsContext";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParams } from "../navigator/StackNavigator";
@@ -73,7 +73,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
             <Text style={customStyles.label}>Nombre:</Text>
             <View style={{...customStyles.inputContainer}}>
               <DropDown
-                data={tours}
+                data={bookingsState.tours.map(tour => tour.name)}
                 onSelect={(text) => handleDataChange({name: 'tour', value: text})}
                 value={data.tour}
                 placeHolder='Nombre de tour'
@@ -119,7 +119,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
             <Text style={customStyles.label}>Estado:</Text>
             <View style={{...customStyles.inputContainer}}>
               <DropDown
-                data={states.map(state => state.name)}
+                data={bookingsState.states.map(state => state.name)}
                 onSelect={(text) => handleDataChange({name: 'state', value: text})}
                 value={data.state}
                 placeHolder='Estado'

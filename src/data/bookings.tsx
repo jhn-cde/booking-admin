@@ -7,21 +7,36 @@ export interface customerInterface{
 export interface bookingInterface{
   id: string,
   tour: string,
-  nTravelers: number,
+  nTravelers: string,
   bookingDate: string,
   tourDate: string,
   customer: customerInterface,
   state: string
 }
 
-export const states = [{name:'Pendiente', color:'#feb500'}, {name: 'Finalizado',color:'#198754'}, {name:'Cancelado', color:'#8B008B'}]
-export const tours = ['Manu', 'Tambopata', 'Machupicchu', 'Humantay', 'Cusco']
+export interface stateInterface{
+  name: string,
+  color: string
+}
+
+export interface tourInterface{
+  name: string
+}
+
+export const initialStates = [
+  {name:'Pendiente', color:'#feb500'},
+  {name: 'Finalizado',color:'#198754'},
+  {name:'Cancelado', color:'#8B008B'}]
+
+export const initialTours = [
+  {name: 'Manu'}, {name: 'Tambopata'}, {name: 'Machupicchu'},
+  {name: 'Humantay'}, {name: 'Cusco'}]
 
 export const bookings = [
   {
     id: '1',
     tour: 'Cusco',
-    nTravelers: 4,
+    nTravelers: '4',
     bookingDate: '2022/05/2',
     tourDate: '2022/08/20',
     customer: {
@@ -35,7 +50,7 @@ export const bookings = [
   {
     id: '2',
     tour: 'Machupicchu',
-    nTravelers: 3,
+    nTravelers: '3',
     bookingDate: '2022/06/20',
     tourDate: '2022/08/20',
     customer: {
@@ -49,7 +64,7 @@ export const bookings = [
   {
     id: '3',
     tour: 'Manu',
-    nTravelers: 1,
+    nTravelers: '1',
     bookingDate: '2022/06/20',
     tourDate: '2022/09/21',
     customer: {
@@ -63,7 +78,7 @@ export const bookings = [
   {
     id: '4',
     tour: 'Manu',
-    nTravelers: 1,
+    nTravelers: '1',
     bookingDate: '2022/06/20',
     tourDate: '2022/09/21',
     customer: {
@@ -77,7 +92,7 @@ export const bookings = [
   {
     id: '5',
     tour: 'Manu',
-    nTravelers: 1,
+    nTravelers: '1',
     bookingDate: '2022/06/20',
     tourDate: '2022/09/21',
     customer: {
@@ -91,7 +106,7 @@ export const bookings = [
   {
     id: '6',
     tour: 'Humantay',
-    nTravelers: 2,
+    nTravelers: '2',
     bookingDate: '2022/06/20',
     tourDate: '2022/09/15',
     customer: {
@@ -105,7 +120,7 @@ export const bookings = [
   {
     id: '7',
     tour: 'Humantay',
-    nTravelers: 1,
+    nTravelers: '1',
     bookingDate: '2022/06/20',
     tourDate: '2022/09/15',
     customer: {
@@ -119,7 +134,7 @@ export const bookings = [
   {
     id: '8',
     tour: 'Machupicchu',
-    nTravelers: 3,
+    nTravelers: '3',
     bookingDate: '2022/06/20',
     tourDate: '2022/09/20',
     customer: {
@@ -133,7 +148,7 @@ export const bookings = [
   {
     id: '9',
     tour: 'Cusco',
-    nTravelers: 1,
+    nTravelers: '1',
     bookingDate: '2022/05/20',
     tourDate: '2022/09/10',
     customer: {
@@ -147,7 +162,7 @@ export const bookings = [
   {
     id: '10',
     tour: 'Cusco',
-    nTravelers: 1,
+    nTravelers: '1',
     bookingDate: '2022/05/21',
     tourDate: '2022/09/11',
     customer: {
@@ -161,7 +176,7 @@ export const bookings = [
   {
     id: '11',
     tour: 'Tambopata',
-    nTravelers: 2,
+    nTravelers: '2',
     bookingDate: '2022/07/12',
     tourDate: '2022/10/01',
     customer: {
@@ -175,7 +190,7 @@ export const bookings = [
   {
     id: '12',
     tour: 'Machupicchu',
-    nTravelers: 4,
+    nTravelers: '4',
     bookingDate: '2022/07/10',
     tourDate: '2022/10/12',
     customer: {
@@ -189,7 +204,7 @@ export const bookings = [
   {
     id: '13',
     tour: 'Machupicchu',
-    nTravelers: 1,
+    nTravelers: '1',
     bookingDate: '2022/07/28',
     tourDate: '2022/11/01',
     customer: {
@@ -203,7 +218,7 @@ export const bookings = [
   {
     id: '14',
     tour: 'Machupicchu',
-    nTravelers: 1,
+    nTravelers: '1',
     bookingDate: '2022/06/28',
     tourDate: '2022/11/01',
     customer: {
@@ -217,7 +232,7 @@ export const bookings = [
   {
     id: '15',
     tour: 'Tambopata',
-    nTravelers: 1,
+    nTravelers: '1',
     bookingDate: '2022/07/24',
     tourDate: '2022/10/01',
     customer: {
@@ -231,7 +246,7 @@ export const bookings = [
   {
     id: '16',
     tour: 'Manu',
-    nTravelers: 1,
+    nTravelers: '1',
     bookingDate: '2022/07/2',
     tourDate: '2022/10/02',
     customer: {

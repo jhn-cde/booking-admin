@@ -1,21 +1,23 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { StyleSheet, Text, TouchableOpacity, View,ScrollView } from "react-native"
-import { states } from "../data/bookings"
-import { tourInterface } from "../helpers/getCustomers"
+import { BookingsContext } from "../context/BookingsContext"
+import { bookingTourInterface } from "../helpers/getCustomers"
 import { colores, styles } from "../theme/appTheme"
 
 interface Props{
-  tours: tourInterface[],
+  tours: bookingTourInterface[],
   navigate: (id: string) => void
 }
 
 export const ToursScrollView = ({tours, navigate}:Props) => {
   const [curState, setCurState] = useState({name:'', color: colores.secondary})
 
+  const { bookingsState } = useContext(BookingsContext)
+
   return (
     <View style={{maxWidth: '80%'}}>
       <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{marginBottom: 5}}>
-        {[{name:'', color: colores.secondary}, ...states].map(state =>
+        {[{name:'', color: colores.secondary}, ...bookingsState.states].map(state =>
           <TouchableOpacity
             key={state.name}
             onPress={() => setCurState(state)}
@@ -39,7 +41,7 @@ export const ToursScrollView = ({tours, navigate}:Props) => {
               key={tour.id}
               style={{
                 ...customStyles.tourContainer,
-                backgroundColor: curState.name===''?states.filter(item => item.name===tour.state)[0].color:curState.color,
+                backgroundColor: curState.name===''?bookingsState.states.filter(item => item.name===tour.state)[0].color:curState.color,
               }}>
             <TouchableOpacity
               key={tour.id}
@@ -55,7 +57,6 @@ export const ToursScrollView = ({tours, navigate}:Props) => {
         })}
       </ScrollView>
     </View>
-
   )
 }
 
