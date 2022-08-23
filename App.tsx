@@ -1,20 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Tabs } from './src/navigator/Tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { BookingsProvider } from './src/context/BookingsContext';
+import { StackNavigator } from './src/navigator/StackNavigator';
 
 export default function App() {
   return (
-    <>
-      <Tabs />
-    </>
+    <NavigationContainer>
+      <BookingsProvider>
+        <StackNavigator />
+      </BookingsProvider>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

@@ -1,45 +1,73 @@
-import { Text, View } from "react-native"
-import { colores } from "../theme/appTheme"
+import { useContext } from "react"
+import { format } from 'date-fns'
+import { FlatList, StyleSheet, Text, View } from "react-native"
+import { DateContext } from "../context/DateContext"
 import { BookingItem } from "./BookingItem"
+import { getBookinsByStateDate } from "../helpers/getBookingsByState"
+import { bookingInterface } from "../data/bookings"
+import { styles } from "../theme/appTheme"
 
-//temporal
-const bookings = [
-  {
-    id: '123',
-    data: {
-      tour: 'Cusco',
-      customerId: 'customer1a',
-      customerName: 'Will A. M',
-      nTravelers: 4
-    }
-  },
-  {
-    id: '321',
-    data: {
-      tour: 'Machupicchu',
-      customerId: 'customer1b',
-      customerName: 'Elizabeth',
-      nTravelers: 3
-    }
-  },
-  {
-    id: '213',
-    data: {
-      tour: 'Manu',
-      customerId: 'customer1c',
-      customerName: 'Albus',
-      nTravelers: 1
-    }
-  },
-]
+interface groupedInterface{
+  date: string,
+  bookings: bookingInterface[]
+}
 
-export const BookingsList = () => {
+
+const groupByDate = (ungrouped: bookingInterface[]) => {
+  let grouped: groupedInterface[]
+  grouped = []
+  
+  ungrouped.map((booking: bookingInterface) =>{
+    const date = format(new Date(booking.tourDate), 'd MMM, y')
+    const index = grouped.findIndex(elem => elem.date === date)
+    
+    if(index === -1){
+      grouped.push({
+        date,
+        bookings: [booking]
+      })
+    }
+    else
+      grouped[index].bookings.push(booking)
+  })
+  return grouped
+}
+
+interface Props{
+  navigateTo: (id: string) => void
+}
+
+export const BookingsList = ({navigateTo}: Props) => {
+  const { dateState } = useContext(DateContext)
+
+  let bookings = getBookinsByStateDate('Pendiente', dateState.curDate)
+
+  const grouped = groupByDate(bookings)
+
   return (
-    <View>
-      {bookings.map((booking) =>
-        <BookingItem key={booking.id} {...booking.data}/>
-      )}
-      
+    <View style={customStyles.container}>
+      <FlatList
+        data={grouped}
+        keyExtractor={item => item.date}
+        renderItem={({item}) => (
+          <View style={{marginBottom: 25}}>
+            <Text style={styles.subtitle}>
+              {item.date}
+            </Text>
+            {item.bookings.map(
+              (booking) => <BookingItem key={booking.id} {...booking} navigateTo={navigateTo}/>
+            )}
+          </View>
+        )}
+      />
     </View>
   )
 }
+
+const customStyles = StyleSheet.create({
+  container:{
+    flex:1, 
+    flexDirection: 'row', 
+    alignItems: 'flex-end'
+  }
+})

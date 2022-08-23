@@ -1,20 +1,42 @@
-import { StyleSheet, TouchableNativeFeedback, View } from "react-native"
-import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-import { colores, tema } from "../theme/appTheme";
+import { Pressable, StyleSheet, View } from "react-native"
+import { Ionicons as Icon} from '@expo/vector-icons';
+import { colores } from "../theme/appTheme";
 
-export const FloatingButton = () => {
+interface Props {
+  navigateTo: () => void,
+  iconName: keyof typeof Icon.glyphMap
+}
+
+export const FloatingButton = ({navigateTo, iconName}: Props) => {
+
+  const navigate = () => {
+    navigateTo()
+  }
+
   return(
     <View
       style={styles.botonContainer}
     >
-      <TouchableNativeFeedback
-        background={TouchableNativeFeedback.Ripple(colores.primary, false, 30)}
-        onPress={ () => {} }
-      >
-        <View style={styles.boton}>
-          <Icon name="plus" color={'white'} size={35} />
-        </View>
-      </TouchableNativeFeedback>
+        <Pressable
+          style={({ pressed }) => [
+            {
+              backgroundColor: pressed
+              ? colores.acentoPress
+              : colores.acento
+            },
+            styles.boton
+          ]}
+          onPress={ navigate }
+        >
+          {({ pressed }) => (
+          <Icon
+            name={iconName}
+            style={{
+              ...styles.text,
+            }}
+          />
+        )}
+        </Pressable>
     </View>
   )
 }
@@ -36,12 +58,10 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colores.acento,
-
-    shadowColor: tema == 'dia'? colores.text: colores.acento,
-    shadowOpacity: 0.4,
-    shadowRadius: 1,
-    shadowOffset: {width: 1, height: 3},
-    elevation: 8
+    elevation: 3
+  },
+  text:{
+    fontSize: 35,
+    color: colores.primary
   }
 })

@@ -1,9 +1,23 @@
-import { Text, View } from "react-native"
+import { View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParams } from "../navigator/StackNavigator";
 import { colores, styles } from "../theme/appTheme"
 
-export const CustomersScreen = () => {
+import { Header } from "../components/Header"
+import { CustomersList } from "../components/CustomersList";
+import { SearchBar } from "../components/SearchBar";
+import { TextProvider } from "../context/TextContext";
+
+type Props = NativeStackScreenProps<RootStackParams, 'Tabs'>;
+
+const CustomersScreen = ({navigation}: Props) => {
   const {top: paddingTop} = useSafeAreaInsets()
+
+  const navigateTo = (id: string) => {
+    navigation.navigate('Booking', {id: id})
+  }
+
   return (
     <View
       style={{
@@ -13,13 +27,20 @@ export const CustomersScreen = () => {
         flex: 1
       }}
     >
-      <Text style={{
-        ...styles.title,
-        color: colores.secondary,
-        fontWeight: '500'
-      }}>
-        Customers
-      </Text>
+      <Header title={'Clientes'}>
+        <SearchBar />
+      </Header>
+      
+      <CustomersList navigateTo={navigateTo}/>
+
     </View>
+  )
+}
+
+export const CustomersScreenState = ({route, navigation}: Props) => {
+  return(
+    <TextProvider>
+      <CustomersScreen route={route} navigation={navigation}/>
+    </TextProvider>
   )
 }

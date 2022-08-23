@@ -1,22 +1,12 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import Icon from '@expo/vector-icons/MaterialCommunityIcons';
+import Icon from '@expo/vector-icons/Ionicons';
 
-import { CalendarScreen } from '../screens/CalendarScreen'
-import { CustomersScreen } from '../screens/CustomersScreen'
-import { NavigationContainer } from '@react-navigation/native';
+import { CalendarScreenState } from '../screens/CalendarScreen'
+import { CustomersScreenState } from '../screens/CustomersScreen'
 import { colores } from '../theme/appTheme';
-
-export const Tabs = () => {
-  return (
-    <NavigationContainer>
-      <TabsAndroid/>
-    </NavigationContainer>
-  )
-}
-
 const TabAndroid = createMaterialBottomTabNavigator();
 
-const TabsAndroid = () => {
+export const Tabs = () => {
   return(
     <TabAndroid.Navigator
       barStyle={{backgroundColor: colores.secondary}}
@@ -24,7 +14,7 @@ const TabsAndroid = () => {
     >
       <TabAndroid.Screen
         name="CalendarScreen"
-        component={CalendarScreen}
+        component={CalendarScreenState}
         options={{
           title: 'Calendario',
           tabBarIcon: ({ color }) => (
@@ -34,11 +24,11 @@ const TabsAndroid = () => {
       />
       <TabAndroid.Screen
         name="CustomersScreen"
-        component={CustomersScreen}
+        component={CustomersScreenState}
         options={{
           title: 'Clientes',
           tabBarIcon: ({ color }) => (
-            <Icon name="human-male-female" color={color} size={26} />
+            <Icon name="people" color={color} size={26} />
           ),
         }}
       />
