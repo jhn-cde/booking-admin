@@ -16,7 +16,7 @@ export const ToursScrollView = ({tours, navigate}:Props) => {
 
   return (
     <View style={{maxWidth: '80%'}}>
-      <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{marginBottom: 5}}>
+      <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
         {[{name:'', color: colores.secondary}, ...bookingsState.states].map(state =>
           <TouchableOpacity
             key={state.name}
@@ -34,7 +34,7 @@ export const ToursScrollView = ({tours, navigate}:Props) => {
           </TouchableOpacity>
         )}
       </ScrollView>
-      <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
+      <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{marginTop: 14}}>
         {tours.filter(tour => tour.state.includes(curState.name)).map(tour => {
           return (
             <View
@@ -46,11 +46,11 @@ export const ToursScrollView = ({tours, navigate}:Props) => {
             <TouchableOpacity
               key={tour.id}
               onPress={() => navigate(tour.id)}
+              style={{justifyContent: 'center', alignItems: 'center'}}
             >
                 <Text style={{...customStyles.tourText}}>
                   {tour.name}
                 </Text>
-
             </TouchableOpacity>
             </View>
           )
@@ -73,7 +73,7 @@ const customStyles = StyleSheet.create({
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 50,
-    marginRight: 5
+    marginRight: 5,
   },
   tourText:{
     ...styles.text,
