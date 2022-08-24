@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, View } from "react-native"
+import { Pressable, StyleSheet, TouchableOpacity, TouchableHighlight, View } from "react-native"
 import { Ionicons as Icon} from '@expo/vector-icons';
 import { colores } from "../theme/appTheme";
 
@@ -17,18 +17,17 @@ export const FloatingButton = ({navigateTo, iconName}: Props) => {
     <View
       style={styles.botonContainer}
     >
-        <Pressable
-          style={({ pressed }) => [
+        <TouchableOpacity
+          style={[
             {
-              backgroundColor: pressed
-              ? colores.acentoPress
-              : colores.acento
+              backgroundColor: colores.acento
             },
             styles.boton
           ]}
           onPress={ navigate }
+          activeOpacity={0.5}
         >
-          {({ pressed }) => (
+          {(
           <Icon
             name={iconName}
             style={{
@@ -36,7 +35,7 @@ export const FloatingButton = ({navigateTo, iconName}: Props) => {
             }}
           />
         )}
-        </Pressable>
+        </TouchableOpacity>
     </View>
   )
 }

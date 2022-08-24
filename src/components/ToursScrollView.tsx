@@ -47,6 +47,8 @@ export const ToursScrollView = ({tours, navigate}:Props) => {
               key={tour.id}
               onPress={() => navigate(tour.id)}
               style={{justifyContent: 'center', alignItems: 'center'}}
+
+              activeOpacity={0.5}
             >
                 <Text style={{...customStyles.tourText}}>
                   {tour.name}
