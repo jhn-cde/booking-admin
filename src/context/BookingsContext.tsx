@@ -23,6 +23,7 @@ export interface BookingsContextProps{
   removeBooking: (bookingId: string) => void,
   editBooking: (pbooking: bookingInterface) => void,
   addTour: (ptour: string) => void,
+  editBookingProperty: (pId: string, pData: {name:string, value:string}) => void
 }
 
 // contexto
@@ -41,6 +42,9 @@ export const BookingsProvider = ({children}: any) => {
   const editBooking = (pBooking: bookingInterface) => {
     dispatch({type: 'editBooking', payload: pBooking})
   }
+  const editBookingProperty = (pId: string, pData: {name:string, value:string}) => {
+    dispatch({type: 'editBookingProperty', payload:{pId, pData}})
+  }
   const addTour = (ptour: string) => {
     dispatch({type: 'addTour', payload: ptour})
   }
@@ -50,6 +54,7 @@ export const BookingsProvider = ({children}: any) => {
       bookingsState,
       addBooking,
       editBooking,
+      editBookingProperty,
       removeBooking,
       addTour
     }}
