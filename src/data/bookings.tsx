@@ -1,3 +1,5 @@
+import { colores } from "../theme/appTheme"
+
 export interface customerInterface{
   nDoc: string,
   name: string,
@@ -24,9 +26,9 @@ export interface tourInterface{
 }
 
 export const initialStates = [
-  {name:'Pendiente', color:'#feb500'},
-  {name: 'Finalizado',color:'#198754'},
-  {name:'Cancelado', color:'#8B008B'}]
+  {name:'Pendiente', color:colores.acento},
+  {name:'Finalizado', color:colores.succes},
+  {name:'Cancelado', color:colores.cancel}]
 
 export const initialTours = [
   {name: 'Manu'}, {name: 'Tambopata'}, {name: 'Machupicchu'},

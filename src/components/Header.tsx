@@ -22,6 +22,7 @@ export const Header = ({title, children}: Props) => {
         </Text>
         <TouchableOpacity
           onPress={() => {}}
+          activeOpacity={0.5}
         >
           <Icon name="person-circle-outline" size={40} color={colores.secondary}/>
         </TouchableOpacity>

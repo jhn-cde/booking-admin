@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { StyleSheet, Text, View } from "react-native"
 import Icon from '@expo/vector-icons/Ionicons';
 
 import { customerDataInterface } from "../helpers/getCustomers"

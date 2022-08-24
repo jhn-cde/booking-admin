@@ -39,6 +39,7 @@ export const DropDown = ({data, value, onSelect, placeHolder, editable}: Props) 
           </View>
         : <TouchableOpacity
             onPress={() => setShownOption(!shownOption)}
+            activeOpacity={0.5}
           >
             <Text style={customStyles.input}>
               {value}
@@ -53,6 +54,7 @@ export const DropDown = ({data, value, onSelect, placeHolder, editable}: Props) 
             {(editable?data.filter(item => item.toLocaleLowerCase().includes(value.toLocaleLowerCase())):data).map((val) => {
               return(
                 <TouchableOpacity
+                  activeOpacity={0.5}
                   key={val}
                   onPress={() => {
                     onPresss(val)}}

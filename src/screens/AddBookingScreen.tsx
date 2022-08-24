@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from "react-native";
 
 import { DropDown } from "../components/DropDown";
 import { bookingInterface } from "../data/bookings";
@@ -191,21 +191,16 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
         {/* --------- Section customer*/}
         <View style={{...customStyles.section, marginBottom:0}}>
           <View style={{...customStyles.itemContainer, justifyContent:'flex-end'}}>
-            <Pressable
+            <TouchableOpacity
               onPress={saveBooking}
-              style={({ pressed }) => [
-                {
-                  backgroundColor: pressed
-                  ? colores.acentoPress
-                  : colores.acento
-                },
-                customStyles.button
-              ]}
+              style={{
+                  ...customStyles.button,
+                  backgroundColor: colores.acento
+                }}
+              activeOpacity={0.7}
             >
-              {({ pressed }) => (
-                <Text style={customStyles.buttonText}>Guardar</Text>
-              )}
-            </Pressable>
+              <Text style={customStyles.buttonText}>Guardar</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

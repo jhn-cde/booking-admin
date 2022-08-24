@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
-import { Alert, Pressable, StyleSheet, Text, ToastAndroid, View } from "react-native"
+import { Alert, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from "react-native"
 import Icon from '@expo/vector-icons/Ionicons';
 import { useContext, useEffect } from "react"
 import { format } from 'date-fns'
@@ -63,18 +63,16 @@ export const BookingScreen = ({route, navigation}: Props) => {
       }}
     >
       <View style={{flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 10}}>
-        <Pressable
+        <TouchableOpacity
           onPress={eliminarBooking}
-        >{
-          ({pressed}) => (
-            <Text style={{
-              ...styles.danger,
-              color: pressed?colores.dangerPress:colores.danger,
-              borderColor: pressed?colores.dangerPress:colores.danger
-            }}>Elminar</Text>
-          )
-        }
-        </Pressable>
+          activeOpacity={0.5}
+        >
+          <Text style={{
+            ...styles.danger,
+            color: colores.danger,
+            borderColor: colores.danger
+          }}>Elminar</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={customStyles.sectionContainer}>
