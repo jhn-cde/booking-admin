@@ -1,25 +1,28 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { StyleSheet, Text, TouchableOpacity, View,ScrollView } from "react-native"
-import { states } from "../data/bookings"
-import { tourInterface } from "../helpers/getCustomers"
+import { BookingsContext } from "../context/BookingsContext"
+import { bookingTourInterface } from "../helpers/getCustomers"
 import { colores, styles } from "../theme/appTheme"
 
 interface Props{
-  tours: tourInterface[],
+  tours: bookingTourInterface[],
   navigate: (id: string) => void
 }
 
 export const ToursScrollView = ({tours, navigate}:Props) => {
   const [curState, setCurState] = useState({name:'', color: colores.secondary})
 
+  const { bookingsState } = useContext(BookingsContext)
+
   return (
     <View style={{maxWidth: '80%'}}>
-      <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{marginBottom: 5}}>
-        {[{name:'', color: colores.secondary}, ...states].map(state =>
+      <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
+        {[{name:'', color: colores.secondary}, ...bookingsState.states].map(state =>
           <TouchableOpacity
             key={state.name}
             onPress={() => setCurState(state)}
             style={customStyles.stateContainer}
+            activeOpacity={0.5}
           >
             <Text style={{
               ...customStyles.stateText,
@@ -32,30 +35,30 @@ export const ToursScrollView = ({tours, navigate}:Props) => {
           </TouchableOpacity>
         )}
       </ScrollView>
-      <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
+      <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{marginTop: 14}}>
         {tours.filter(tour => tour.state.includes(curState.name)).map(tour => {
           return (
             <View
               key={tour.id}
               style={{
                 ...customStyles.tourContainer,
-                backgroundColor: curState.name===''?states.filter(item => item.name===tour.state)[0].color:curState.color,
+                backgroundColor: curState.name===''?bookingsState.states.filter(item => item.name===tour.state)[0].color:curState.color,
               }}>
             <TouchableOpacity
               key={tour.id}
               onPress={() => navigate(tour.id)}
+              style={{justifyContent: 'center', alignItems: 'center'}}
+              activeOpacity={0.5}
             >
                 <Text style={{...customStyles.tourText}}>
                   {tour.name}
                 </Text>
-
             </TouchableOpacity>
             </View>
           )
         })}
       </ScrollView>
     </View>
-
   )
 }
 
@@ -72,7 +75,7 @@ const customStyles = StyleSheet.create({
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 50,
-    marginRight: 5
+    marginRight: 5,
   },
   tourText:{
     ...styles.text,

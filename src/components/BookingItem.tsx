@@ -15,6 +15,7 @@ export const BookingItem = ({id, tour, customer, nTravelers, navigateTo}: itemIn
   return (
     <TouchableOpacity
       onPress={navigate}
+      activeOpacity={0.5}
     >
       <View style={customStyles.container}>
         <Text style={customStyles.customerText}>

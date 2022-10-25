@@ -1,33 +1,22 @@
-import { StyleSheet } from 'react-native'
-//https://coolors.co/feb500-3066be-ffffff
+import { Appearance, StyleSheet } from 'react-native'
+//https://coolors.co/ffc40c-3066be-ffffff
 
-export let tema = 'dia'
-
-const noche = {
-  primary: '#000000',
-  secondary: '#3066be',
-  acento: '#feb500',
-  acentoPress: '#EAA100',
-  text: '#ffffff',
-  border: '#555555',
-  opacity: '#111111',
-  danger: '#ca0b00',
-  dangerPress: '#843D39'
-}
-
-const dia = {
+export const themeLight = {
   primary: '#ffffff',
   secondary: '#3066be',
-  acento: '#feb500',
-  acentoPress: '#EAA100',
+  acento: '#ffc40c',
+
   text: '#000000',
   border: '#aaaaaa',
   opacity: '#eeeeee',
+  
   danger: '#ca0b00',
-  dangerPress: '#843D39'
+  dangerPress: '#843D39',
+  succes: '#198754',
+  cancel: '#8B008B'
 }
 
-export const colores = tema == 'dia'? dia: noche
+export const colores = themeLight
 
 export const styles = StyleSheet.create({
   globalPadding:{

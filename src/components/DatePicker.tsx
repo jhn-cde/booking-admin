@@ -10,7 +10,6 @@ interface Props{
 }
 
 export const DatePicker = ({date, changeDate}: Props) => {
-  
   const onChange = (event: DateTimePickerEvent, selectedDate: Date | undefined) => {
     const currentDate = selectedDate;
     changeDate(currentDate);
@@ -28,6 +27,7 @@ export const DatePicker = ({date, changeDate}: Props) => {
   return(
     <TouchableOpacity
       onPress={showDatepicker}
+      activeOpacity={0.5}
     >
       <Text style={customStyles.dateContent}>
         {format(date, 'd MMM, y')}  <Icon

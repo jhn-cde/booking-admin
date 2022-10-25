@@ -11,20 +11,13 @@ import { Header } from "../components/Header"
 import { DateContext, DateProvider } from "../context/DateContext";
 import { RootStackParams } from "../navigator/StackNavigator";
 import { DatePicker } from "../components/DatePicker";
-import { TextProvider } from "../context/TextContext";
 
 type Props = NativeStackScreenProps<RootStackParams, 'Tabs'>;
 
 const CalendarScreen = ({navigation}: Props) => {
   
   const { dateState, setDate } = useContext(DateContext)
-
-  const navigateToBooking = (id: string) => {
-    navigation.navigate('Booking', {id: id})
-  }
-  const navigateAddToBooking = () => {
-    navigation.navigate('AddBooking')
-  }
+  
   const onDateChange = (newDate: Date | undefined) => {
     newDate && setDate(newDate);
   }
@@ -49,9 +42,9 @@ const CalendarScreen = ({navigation}: Props) => {
         </View>
       </Header>
       
-      <BookingsList navigateTo={navigateToBooking}/>
+      <BookingsList navigateTo={(id: string) => navigation.navigate('Booking', {id: id})}/>
       <FloatingButton
-        navigateTo={navigateAddToBooking}
+        navigateTo={() => navigation.navigate('AddBooking')}
         iconName='add-outline'
       />
     </View>

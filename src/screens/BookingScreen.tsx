@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
-import { Alert, Pressable, StyleSheet, Text, ToastAndroid, View } from "react-native"
+import { Alert, ScrollView, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from "react-native"
 import Icon from '@expo/vector-icons/Ionicons';
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { format } from 'date-fns'
 
 import { bookingInterfaceId, getBookingById } from "../helpers/getBookingById"
@@ -9,12 +9,12 @@ import { RootStackParams } from "../navigator/StackNavigator"
 import { colores, styles } from "../theme/appTheme"
 import { FloatingButton } from "../components/FloatingButton";
 import { BookingsContext } from "../context/BookingsContext";
-import { states } from "../data/bookings";
 
 interface Props extends NativeStackScreenProps<RootStackParams, 'Booking'>{}
 
 export const BookingScreen = ({route, navigation}: Props) => {
-  const { removeBooking } = useContext(BookingsContext)
+  const { bookingsState, editBookingProperty, removeBooking } = useContext(BookingsContext)
+  const [shownStates, setShownStates] = useState(false)
 
   const booking:bookingInterfaceId = getBookingById(route.params.id)
 
@@ -31,6 +31,11 @@ export const BookingScreen = ({route, navigation}: Props) => {
 
   const editarBooking = () => {
     navigation.navigate('AddBooking', {id: route.params.id})
+  }
+
+  const changeState = (newState: string) => {
+    setShownStates(false)
+    editBookingProperty(booking.id, {name:'state', value: newState})
   }
 
   const eliminarBooking = () => {
@@ -64,18 +69,16 @@ export const BookingScreen = ({route, navigation}: Props) => {
       }}
     >
       <View style={{flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 10}}>
-        <Pressable
+        <TouchableOpacity
           onPress={eliminarBooking}
-        >{
-          ({pressed}) => (
-            <Text style={{
-              ...styles.danger,
-              color: pressed?colores.dangerPress:colores.danger,
-              borderColor: pressed?colores.dangerPress:colores.danger
-            }}>Elminar</Text>
-          )
-        }
-        </Pressable>
+          activeOpacity={0.5}
+        >
+          <Text style={{
+            ...styles.danger,
+            color: colores.danger,
+            borderColor: colores.danger
+          }}>Elminar</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={customStyles.sectionContainer}>
@@ -90,25 +93,69 @@ export const BookingScreen = ({route, navigation}: Props) => {
               </Text>        
             </Text>
 
-            <Text style={customStyles.subsection}>
+            <View style={{...customStyles.subsection, flexDirection: 'row'}}>
               <Text style={customStyles.cat}>Estado: </Text>
-              <Text style={{
-                ...customStyles.value,
-                color: booking?.state?states.filter(item => item.name===booking.state)[0].color:colores.text,
-                fontWeight: booking?.state==='Pendiente'?'600':'500'
-              }}>
-                {booking?.state}
-              </Text>        
-            </Text>
+              <View>
+                <TouchableOpacity
+                  activeOpacity={0.5}
+                  onPress={() =>  setShownStates(!shownStates)}
+                >
+                  <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={{
+                    ...customStyles.value,
+                    color: bookingsState.states.filter(item => item.name===booking.state)[0].color,
+                    fontWeight: booking.state==='Pendiente'?'600':'500',
+                    marginRight: 5
+                  }}>{booking.state}</Text>
+                    <View style={{
+                        transform: [
+                          { rotateZ: shownStates?"180deg":"0deg" }
+                        ]
+                      }}>
+                        <Icon
+                          name="chevron-down-outline"
+                          color={colores.text}/>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+                <View style={customStyles.optionsContainer}>
+                  {shownStates && 
+                  <View>
+                    {(bookingsState.states.map((state) => {
+                      return(
+                        <TouchableOpacity
+                          activeOpacity={0.5}
+                          key={state.name}
+                          onPress={() => changeState(state.name)}
+                          style={{
+                            marginBottom: 4,
+                            backgroundColor: booking.state===state.name?state.color:colores.primary,
+                            borderRadius: 10,
+                            borderColor: colores.opacity,
+                            borderWidth: 1
+                          }}
+                        >
+                          <Text
+                            style={{
+                              marginHorizontal: 6,
+                              color: booking.state===state.name?colores.primary:state.color
+                            }}
+                          >{state.name}</Text>
+                        </TouchableOpacity>
+                      )}))}
+                  </View>}
+                </View>
+              </View>
+            </View>
 
             <Text style={customStyles.subsection}>
               <Text style={customStyles.cat}>Tour: </Text>
-              <Text style={customStyles.value}>{booking?.tour}</Text>        
+              <Text style={customStyles.value}>{booking.tour}</Text>        
             </Text>
 
             <Text style={customStyles.subsection}>
               <Text style={customStyles.cat}>Número de pasajeros: </Text>
-              <Text style={customStyles.value}>{booking?.nTravelers}</Text>        
+              <Text style={customStyles.value}>{booking.nTravelers}</Text>        
             </Text>
 
             <Text style={customStyles.subsection}>
@@ -200,5 +247,15 @@ const customStyles = StyleSheet.create({
     fontSize: 18,
     color: colores.acento,
     fontWeight: '600'
+  },
+  optionsContainer:{
+    position: 'absolute',
+    top: 30,
+    left: -8,
+    zIndex: 1,
+    backgroundColor: colores.primary,
+    width: '120%',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 })

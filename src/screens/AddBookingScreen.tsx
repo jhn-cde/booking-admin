@@ -1,32 +1,20 @@
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from "react-native";
 
 import { DropDown } from "../components/DropDown";
 import { bookingInterface } from "../data/bookings";
 import { colores, styles } from "../theme/appTheme";
 import { useForm } from "../hooks/useForm";
 import { DatePicker } from "../components/DatePicker";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { BookingsContext } from "../context/BookingsContext";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParams } from "../navigator/StackNavigator";
 import { getBookingById } from "../helpers/getBookingById";
 
-const tours = [
-  'Manu',
-  'Tambopata',
-  'Machupicchu',
-  'Cusco',
-]
-const states = [
-  'Pendiente',
-  'Finalizado',
-  'Cancelado',
-]
-
 interface Props extends NativeStackScreenProps<RootStackParams, 'AddBooking'>{}
 
 export const AddBookingScreen = ({route, navigation}: Props) => {
-  const { bookingsState, addBooking, editBooking } = useContext(BookingsContext)
+  const { bookingsState, addBooking, editBooking, addTour } = useContext(BookingsContext)
   const booking = getBookingById(route.params?.id)
   
   let edit = booking.id!=''
@@ -58,12 +46,18 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
     edit
       ?editBooking(newBooking)
       :addBooking(newBooking)
-    
+
+    // verificar si se agrego nuevo tour esta de booking
+    const tmpExiste = bookingsState.tours.find(tour => tour.name.toLowerCase() === data.tour.toLowerCase())
+    // si no existe agregar
+    !!!tmpExiste && addTour(data.tour)
+
     // Mensaje de booking guardado correctamente
     ToastAndroid.show(
       newBooking.tour+'-'+newBooking.customer.name+', se guardó correctamente con id: '+newBooking.id,
       ToastAndroid.LONG
     )
+
     //reestablecer customer values
     edit
       ?navigation.pop()
@@ -76,6 +70,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
     >
       <ScrollView
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps = 'always'
       >
         {/* --------- Section Tour */}
         <View style={customStyles.section}>
@@ -84,8 +79,8 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
             <Text style={customStyles.label}>Nombre:</Text>
             <View style={{...customStyles.inputContainer}}>
               <DropDown
-                data={tours}
-                onSelect={(text) => handleDataChange({name: 'tour', value: text})}
+                data={bookingsState.tours.map(tour => tour.name)}
+                onSelect={(text) => handleDataChange({name: 'tour', value: text.trim()})}
                 value={data.tour}
                 placeHolder='Nombre de tour'
                 editable={true}
@@ -101,7 +96,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
                 placeholder="1"
                 keyboardType="numeric"
                 defaultValue={data.nTravelers}
-                onChangeText={(text) => handleDataChange({name:'nTravelers', value: text})}
+                onChangeText={(text) => handleDataChange({name:'nTravelers', value: text.trim()})}
               />
             </View>
           </View>
@@ -130,8 +125,8 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
             <Text style={customStyles.label}>Estado:</Text>
             <View style={{...customStyles.inputContainer}}>
               <DropDown
-                data={states}
-                onSelect={(text) => handleDataChange({name: 'state', value: text})}
+                data={bookingsState.states.map(state => state.name)}
+                onSelect={(text) => handleDataChange({name: 'state', value: text.trim()})}
                 value={data.state}
                 placeHolder='Estado'
                 editable={false}
@@ -150,7 +145,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
                 style={customStyles.input}
                 placeholder='Nombre'
                 defaultValue={data.name}
-                onChangeText={(text) => handleDataChange({name:'name', value: text})}
+                onChangeText={(text) => handleDataChange({name:'name', value: text.trim()})}
               />
             </View>
           </View>
@@ -162,7 +157,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
                 style={customStyles.input}
                 placeholder='Documento'
                 defaultValue={data.nDoc}
-                onChangeText={(text) => handleDataChange({name:'nDoc', value:text})}
+                onChangeText={(text) => handleDataChange({name:'nDoc', value:text.trim()})}
               />
             </View>
           </View>
@@ -174,7 +169,7 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
                 style={customStyles.input}
                 placeholder='Movil'
                 defaultValue={data.phone}
-                onChangeText={(text) => handleDataChange({name:'phone', value:text})}
+                onChangeText={(text) => handleDataChange({name:'phone', value:text.trim()})}
                 keyboardType= 'phone-pad'
               />
             </View>
@@ -187,30 +182,25 @@ export const AddBookingScreen = ({route, navigation}: Props) => {
                 style={customStyles.input}
                 placeholder='Email'
                 defaultValue={data.email}
-                onChangeText={(text) => handleDataChange({name:'email', value:text})}
+                onChangeText={(text) => handleDataChange({name:'email', value:text.trim()})}
               />
             </View>
           </View>
         </View>
 
         {/* --------- Section customer*/}
-        <View style={customStyles.section}>
+        <View style={{...customStyles.section, marginBottom:0}}>
           <View style={{...customStyles.itemContainer, justifyContent:'flex-end'}}>
-            <Pressable
+            <TouchableOpacity
               onPress={saveBooking}
-              style={({ pressed }) => [
-                {
-                  backgroundColor: pressed
-                  ? colores.acentoPress
-                  : colores.acento
-                },
-                customStyles.button
-              ]}
+              style={{
+                  ...customStyles.button,
+                  backgroundColor: colores.acento
+                }}
+              activeOpacity={0.7}
             >
-              {({ pressed }) => (
-                <Text style={customStyles.buttonText}>Guardar</Text>
-              )}
-            </Pressable>
+              <Text style={customStyles.buttonText}>Guardar</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

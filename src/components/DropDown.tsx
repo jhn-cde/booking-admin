@@ -18,8 +18,8 @@ export const DropDown = ({data, value, onSelect, placeHolder, editable}: Props) 
   const [shownOption, setShownOption] = useState(false)
 
   const onPresss = (val: string) => {
-    setShownOption(!shownOption)
     onSelect(val)
+    setShownOption(false)
   }
 
   return(
@@ -27,14 +27,19 @@ export const DropDown = ({data, value, onSelect, placeHolder, editable}: Props) 
       {
         editable
         ? <View>
-        <TextInput
-            style={customStyles.input}
-            placeholder={placeHolder}
-            defaultValue={value}
-            onFocus={() => setShownOption(!shownOption)}
-          /></View>
+            <TextInput
+              style={customStyles.input}
+              placeholder={placeHolder}
+              defaultValue={value}
+              onFocus={() => setShownOption(true)}
+              onSubmitEditing={() => {setShownOption(false)}}
+              blurOnSubmit={true}
+              onChangeText={(text) => {setShownOption(true); onSelect(text)}}
+            />
+          </View>
         : <TouchableOpacity
             onPress={() => setShownOption(!shownOption)}
+            activeOpacity={0.5}
           >
             <Text style={customStyles.input}>
               {value}
@@ -44,14 +49,15 @@ export const DropDown = ({data, value, onSelect, placeHolder, editable}: Props) 
       <View style={customStyles.optionsContainer}>
         {shownOption && <View style={customStyles.optionsBox}>
           <ScrollView
-            keyboardShouldPersistTaps='handled'
             showsVerticalScrollIndicator={false}
           >
-            {data.map((val, i) => {
+            {(editable?data.filter(item => item.toLocaleLowerCase().includes(value.toLocaleLowerCase())):data).map((val) => {
               return(
                 <TouchableOpacity
-                  key={String(i)}
-                  onPress={() => onPresss(val)}
+                  activeOpacity={0.5}
+                  key={val}
+                  onPress={() => {
+                    onPresss(val)}}
                   style={{...customStyles.touchable,
                     backgroundColor: value==val 
                     ?colores.secondary : colores.opacity,

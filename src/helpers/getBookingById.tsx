@@ -4,7 +4,7 @@ import { BookingsContext } from "../context/BookingsContext";
 export interface bookingInterfaceId{
   id: string,
   tour: string,
-  nTravelers: number,
+  nTravelers: string,
   bookingDate: Date,
   tourDate: Date,
   state: string,
@@ -16,8 +16,8 @@ export interface bookingInterfaceId{
 
 const defaultBooking: bookingInterfaceId = {
   id: '',
-  tour: 'Manu',
-  nTravelers: 1,
+  tour: '',
+  nTravelers: '2',
   bookingDate: new Date(),
   tourDate: new Date(),
   state: 'Pendiente',
@@ -28,23 +28,24 @@ const defaultBooking: bookingInterfaceId = {
 }
 
 export const getBookingById = (id: string | undefined = '' ) => {
-  if(!id)
-    return defaultBooking
+  let res = defaultBooking
 
   const { bookingsState } = useContext(BookingsContext)
 
   const booking = bookingsState.bookings.find(booking => booking.id.toLowerCase() === id.toLowerCase())
 
-  return booking?{
-    id: booking.id,
-    tour: booking.tour,
-    nTravelers: booking.nTravelers,
-    bookingDate: new Date(booking.bookingDate),
-    tourDate: new Date(booking.tourDate),
-    state: booking.state,
-    nDoc: booking.customer.nDoc,
-    name: booking.customer.name,
-    phone: booking.customer.phone,
-    email: booking.customer.email
-  }: defaultBooking
+  if(booking)
+    res = {
+      id: booking.id,
+      tour: booking.tour,
+      nTravelers: booking.nTravelers,
+      bookingDate: new Date(booking.bookingDate),
+      tourDate: new Date(booking.tourDate),
+      state: booking.state,
+      nDoc: booking.customer.nDoc,
+      name: booking.customer.name,
+      phone: booking.customer.phone,
+      email: booking.customer.email}
+
+  return res
 }
